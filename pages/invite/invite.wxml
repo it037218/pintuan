@@ -1,0 +1,55 @@
+<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+  <block wx:for="{{imgUrls}}">
+    <swiper-item>
+      <image src="{{item}}" class="slide-image" width="355" height="150" />
+    </swiper-item>
+  </block>
+</swiper>
+<view>
+  <view class='title'>
+    <view class='special-text'>5人团</view>
+    <view>299招代理|这里是商品名称以及瞩目的标题</view>
+  </view>
+  <view class='desc'>
+    详细介绍详细介绍详细介绍详细介绍详细介绍详细介绍详细介绍详细介绍
+  </view>
+  <view class='price-content'>
+    <text>￥299</text>
+    <text>拼团价</text>
+    <text>￥10000</text>
+    <text>已开团 6688</text>
+  </view>
+</view>
+<view class='show-rules'>
+  <view>
+    拼团玩法</view>
+</view>
+
+
+<view>
+  <view>商品详情</view>
+</view>
+
+<!--一键开团-->
+<view class='status0'>
+  <view>￥299 一键开团</view>
+</view>
+
+<!--支付未完成-->
+<view class='status1'>
+  <view>
+    支付未完成 继续开团
+
+    <text class='clock'></text>
+    <text>28:26</text>
+  </view>
+</view>
+<!--待支付-->
+<view class='status2'>
+  <view>
+    取消
+  </view>
+  <view>
+    去支付
+  </view>
+</view>

@@ -1,0 +1,13 @@
+{
+  "pages":[
+    "pages/invite/invite",
+    "pages/invited/invited",
+    "pages/user/user"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"black"
+  }
+}
