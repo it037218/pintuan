@@ -1,2 +1,23 @@
 <!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+<view>
+  <view class='avatar'>
+    <image src='{{userInfo.avatar}}'></image>
+    <text>{{userInfo.nickname}}</text>
+  </view>
+  <view class='user-info'>
+    <view class='tel'>
+      <view class='icon'></view>
+      <view>{{userInfo.tel}}</view>
+    </view>
+    <view class='wx_id'>
+      <view class='icon'></view>
+      <view>{{userInfo.wx_id}}</view>
+    </view>
+    <view class='address'>
+      <view class='icon'></view>
+      <view>{{userInfo.address}}</view>
+    </view>
+      <view class='trangle_up'></view>
+
+  </view>
+</view>

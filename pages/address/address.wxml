@@ -1,0 +1,56 @@
+<form bindsubmit="formSubmit">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">当前默认地址</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请选择当前默认地址" name='total_address' value='{{address}}' disabled/>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">收货地址</view>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="section">
+          <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <view class="picker">
+              {{region[0]}}，{{region[1]}}，{{region[2]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell_input">
+      <view class="weui-cell__hd">
+        <view class="weui-label">详细地址</view>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" placeholder="请输入街道地址" name='street' value='{{street}}' bindblur="changeAddress"/>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_switch">
+      <view class="weui-cell__bd">设为默认地址</view>
+      <view class="weui-cell__ft">
+        <switch  name='default' checked='{{defaultSet}}' bindchange="switchDefault"/>
+      </view>
+    </view>
+  </view>
+  <view class='option-content'>
+    <view class='status2'>
+      <view bindtap='cancelAddress'>
+        取消
+      </view>
+      <view bindtap='saveAddress'>
+        <button formType="submit" style='color:#fff;background-color:#ed3a3e;height:88rpx;line-height:88rpx;'>确定</button>
+      </view>
+    </view>
+  </view>
+</form>

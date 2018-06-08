@@ -1,0 +1,9 @@
+/* pages/payresult/payresult.wxss */
+page{
+  background-color: #7EBF52
+}
+.bg{
+  background: url('https://pintuan.guangxing.club/wximg/payresult_bg.png');
+  height: 228rpx;
+  background-size: contain;
+}

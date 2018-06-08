@@ -1,0 +1,38 @@
+/* pages/address.wxss */
+page{
+  background-color: #F6F4F5;
+}
+.weui-cells:nth-child(1){
+  border-top: 1px solid #F2F2F2;
+  height: 140rpx;
+  line-height: 140rpx;
+}
+.weui-cells .weui-cell{
+   height: 115rpx;
+  line-height: 115rpx;
+}
+.weui-cells:nth-child(2),.weui-cells:nth-child(3){
+  margin-top: 45rpx;
+  border:none;
+ 
+}
+.weui-cells:before,.weui-cells:after {
+  border: none;
+}
+
+.weui-cell:after {
+  border: 1px solid #F2F2F2;
+}
+.weui-cell__hd{
+  font-size: 30rpx;  
+}
+.weui-cell_switch .weui-cell__bd{
+  font-size: 30rpx;
+}
+.weui-cell__bd{
+  font-size: 30rpx;
+}
+.section .picker{
+  padding: 0;
+  border: none
+}

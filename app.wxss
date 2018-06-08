@@ -1,3 +1,4 @@
+@import 'weui.wxss';
 /**app.wxss**/
 .container {
   height: 100%;
@@ -8,3 +9,210 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.groupNum1 {
+  font-size: 26rpx;
+  display: block;
+  text-align: center;
+  margin-top: 20rpx;
+}
+
+.show-rules {
+  margin-top: 20rpx;
+}
+
+.show-rules-title {
+  height: 80rpx;
+  background-color: #f5fbfd;
+  line-height: 80rpx;
+  padding-left: 45rpx;
+  font-size: 30rpx;
+  color: #434343;
+}
+
+.show-rules .icon {
+  display: block;
+  float: right;
+  width: 40rpx;
+  height: 40rpx;
+  background: url('https://pintuan.guangxing.club/wximg/down.png') no-repeat;
+  background-size: contain;
+  margin-top: 20rpx;
+  margin-right: 45rpx;
+}
+
+.icon_down_rotate .icon {
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+}
+
+.show-rules-content {
+  display: none;
+}
+
+.showRuleContentOn {
+  font-size: 26rpx;
+  display: block;
+  padding: 45rpx;
+}
+
+.show-details {
+  margin-top: 15rpx;
+  font-size: 30rpx;
+  color: #434343;
+  padding: 45rpx;
+  background-color: #f5f9eb;
+  margin-bottom:  55rpx;
+}
+.option-content{
+  position: fixed;
+  width: 100%;
+  bottom: 20rpx;
+  overflow: hidden;
+}
+.option-content .status2 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.option-content .status2 view {
+  width: 330rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  text-align: center;
+  border-radius: 10rpx;
+}
+
+.option-content .status2 view:nth-child(1) {
+  background-color: #e4e5e6;
+  color: #747576;
+}
+
+.option-content .status2 view:nth-child(2) {
+  color: #fff;
+  background-color: #ed3a3e;
+}
+
+.option-content .status0 view {
+  width: 690rpx;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  font-size: 36rpx;
+  background-color: #e94f4f;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.option-content .status1 {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.option-content .status1 {
+  width: 690rpx;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  font-size: 36rpx;
+  background-color: #fabd3f;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+  display: flex;
+  justify-content:center;
+}
+.option-content .status1 view{
+  height: 100%;
+}
+.option-content .status1 .clock {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAErUlEQVRoQ+2ZR4htRRCGv2dEUTEgigtRFMyCihFzThgWrsSMiC5E0IU5oaALFV24EDPqSjDnnBMqmAMihoU5oKBi5Buqh/Z4zj3d9547bwYseDxmprpO/V3V1X9XLWKBy6IF7j//A4gIuhGbA7sDOwK7AKs1ovsV8AzwNPAU8Abw96QZMGkE1gGOBY4D1qp05jPgRuA64JPKtbPq4wLYDjgH2A8mTsO/gAeA84BXa4HUAlgRuAo4uuVDfwLPA48AHwIfAR8AvwGrxr81gYOBw4FVGjZMp5uAk4GfSoHUANgYuBdYt2H8ofjw/cCPhR9eGjgUOBHYtbHmY+AA4N0SW6UANouDl++aO30u8GLJh0bo7Bx29sh0vgb8/Xt9tksArAe8lFWVPyKFbu0zXvn3I4FrAaOjCGL7SMVOU30AzFmdXzssfA8cGLle6V+RuiX47ux8fApsA3zZtXoUgGWBF4AtYrH5vXUc0CJvxlTaEHgFWCHWvxx3y+9t9kYBuAI4JRZZIfYGHi106mLgTOBS4PTCNbmah/ierERfDpxaA8BD+zqwZCyy5l9U4Yi7tRTgeUk5XbF8RtV74fxYZInetO1Qd0XgQWCfWCyQLSu/nlOEJSagDG+G437eMm1k/iVtADw0HtwkVoLaUjkUgN2AxzNfZAC5b6004IbspjUPD6rcfdWHApB2XsqiWGaPz/1pRsDK801WAfaqOLi53SEB6MPDYfznoCSzFakJQDr8WCj/Ash9PEC1MiQAC8l3wErhhFRdSj4jTQBWmrPib7cDh9V6HvpDAtCktPuosH1hVKhWAOa8N61yAnDNPAFwBHBz+HIXcEhXBKTB68cfx81/lw8dAYleukTfB7ytWyNgriXGuQnwzjyJgFT+7fDFIrN6FwBfR+lcrFzB75s4h46Am+rmKr8Cy3UB8OpP9MFTX/wyaiCoeaxfApzRE+liADLOVK7MM/NtHHGXvFNKxHK9fI+i3MwuhjIyhfJD7DX+ZIkHLTqJjZYsL2Gs+8bDX3u+0jbqSqG8jFq6binxYA50fDtfHd+5M97TMz82LzIvCamzcn30e+bAv95P3JHVfin2BV0RyNnft8AaY1KJXo8qFJYBfsgqj499O3ytEVDZQyIHUia5zCp8HKm6P3BfaPSSuZQ6x8SCcen0UM5rR+cFofTSaZW2bTxgZKhPDOlRhS2ZZ14JtwJey9d3PSnttvmIV94CrMNzLfrmt6URiv3TFIlZX7oAeIm5ON3KZwPW9rkUu36p2vgmkZv952KdVltlUqA+Ic395N9lwGltRkcBsB3iYz51JKQZPqp7+5UTej9YY0s/bC3as0/Di2m3FneIDnii9LYWLSpfdG1KX2/UdRsAz81Bc9eZgU9HG2KK95ERd87QKSUAXDzN9vpO0V7fM/PSSBuN3nQtBaDtrgGHdfrKOHStDdiW7UsDjpNiIJirOODwEBdR+RoAfmTUiEnudBsgW3Qi6QvK39laNKcdMy3WEVO+S7YbvRuGGvJJWXyZ1bYwJ54wpjGr7T53t0Y+B2xjLpYxa9PRNOh2YCfd9X9TJhfT6tmYtc2bQXfNjk9Ft/YQT8WJSYwueAD/AMfC9TFVGDfcAAAAAElFTkSuQmCC') no-repeat;
+  width: 40rpx;
+  height: 100%;
+  background-size: 40rpx 40rpx;
+  background-position: center;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-right: 10rpx;
+
+
+}
+
+.option-content .status1 .count-down {
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  margin-left: 20rpx;
+}
+
+
+.option-content .status3 view,.status4 view,.status6 view{
+width: 690rpx;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  font-size: 36rpx;
+  background-color: #e94f4f;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.option-content .status5 view{
+width: 690rpx;
+  margin: 0 auto;
+  text-align: center;
+  color: #29B82D;
+  font-size: 36rpx;
+  background-color: #EDEEEF;
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+
+.citypickers{
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  background-color: red;
+}
+
+.citypicker{
+  
+}
+.citybody {
+  position: fixed;
+  bottom: 0px;
+}
+
+.cityheader {
+  position: absolute;
+  top:0px;
+  width: 100%;
+  z-index: 4;
+}
+
+.city-cancel {
+  float: left;
+  margin: 20rpx;
+  color: #818181;
+}
+
+.city-true {
+  float: right;
+  margin: 20rpx;
+  color: #2FB42E
+}
+
+.section .picker {
+  background-color: #fff;
+  border-bottom: 1px #d9d9d9 solid;
+  border-top: 1px #d9d9d9 solid;
+  padding: 20rpx;
+}

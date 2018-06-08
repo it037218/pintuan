@@ -1,13 +1,17 @@
 {
-  "pages":[
+  "pages": [
     "pages/invite/invite",
     "pages/invited/invited",
-    "pages/user/user"
+    "pages/user/user",
+    "pages/address/address",
+    "pages/payresult/payresult",
+    "pages/inviteDetail/index",
+    "pages/invitedDetail/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   }
 }
