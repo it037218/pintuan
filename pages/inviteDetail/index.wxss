@@ -114,7 +114,7 @@ page {
 
 .member_content {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   margin-top: 17rpx;
 }
 
@@ -124,6 +124,7 @@ page {
   border-radius: 50%;
   /* overflow: hidden; */
   position: relative;
+  margin-left: 40rpx;
 }
 
 .member_content >view image {
