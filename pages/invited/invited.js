@@ -192,5 +192,22 @@ Page({
         console.log(rst)
       }
     })
-  }
+  },
+  payForOrder: function () {
+    var that = this;
+    wx.request({
+      url: url + '/wx/createOrder',
+      data: {
+        'commodity_id': that.data.commodity_id,
+        'openid': openid,
+        'utm': 'other'
+      },
+      success: function (rst) {
+        var content = rst.data;
+        wx.navigateTo({
+          url: '/pages/inviteDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo,
+        })
+      }
+    })
+  },
 })

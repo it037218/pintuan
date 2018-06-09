@@ -33,19 +33,13 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": -1,
 			"list": [
 				{
 					"id": -1,
 					"name": "用户信息",
 					"pathName": "pages/user/user",
 					"query": ""
-				},
-				{
-					"id": 1,
-					"name": "开团-02-订单详情-待支付",
-					"pathName": "pages/inviteDetail/index",
-					"query": "status=1&orderNo=2018060702172615283090462&commodity_id=1"
 				},
 				{
 					"id": 2,
@@ -82,12 +76,6 @@
 					"name": "开团-02-拼团成功",
 					"pathName": "pages/inviteDetail/index",
 					"query": "status=4"
-				},
-				{
-					"id": -1,
-					"name": "开团-02-拼团失败",
-					"pathName": "pages/inviteDetail/index",
-					"query": "status=5"
 				},
 				{
 					"id": -1,

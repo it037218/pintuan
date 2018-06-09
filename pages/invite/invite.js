@@ -35,7 +35,6 @@ Page({
 
     // this.getProductDetail(options.com_id);
     // this.setData({ commodity_id: options.com_id });
-    // this.checkUserOrder(options.com_id)
   },
 
   /**
@@ -96,6 +95,9 @@ Page({
       success: function (rst) {
         var content = rst.data
         console.log(content)
+        that.setData({'commodity_id':content.id})
+        that.checkUserGroup(content.id)
+
         content.images = domainUrl + content.images
         that.setData({ productInfo: content })
       }
@@ -117,7 +119,7 @@ Page({
       data: {
         'commodity_id': that.data.commodity_id,
         'openid': openid,
-        'utm':that.data.utm
+        'utm':'self'
       },
       success: function (rst) {
         var content = rst.data;
@@ -139,6 +141,35 @@ Page({
         
        }
      })
+  },
+  checkUserGroup:function(com_id){
+    wx.request({
+      url: url+'/wx/checkUserGroup',
+      data:{
+        com_id:com_id,
+        openid:openid
+      },
+      success:function(rst){
+        var self = rst.data.self.length;
+        var other = rst.data.other.length;
+        console.log(self)
+        console.log(other)
+
+        if(self && !other){
+          console.log('self')
+          wx.redirectTo({
+            url: '/pages/orderList/index?utm=self',
+          })
+        }else if(!self && other){
+          console.log('other')
+
+          wx.redirectTo({
+            url: '/pages/orderList/index?utm=other',
+          })
+        }
+
+      }
+    })
   }
 
 

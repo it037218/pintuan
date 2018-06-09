@@ -24,14 +24,12 @@ Page({
   onLoad: function (options) {
     if('utm' in options){
       if(options.utm == 'self'){
-        this.setData({activeIndex: 1})
+        this.setData({activeIndex: 0})
       }else{
-        this.setData({ activeIndex: 0 })
+        this.setData({ activeIndex: 1 })
       }
 
     }
-
-
     this.getUserDetail()
     var that = this;
     this.getUserGroupList();
@@ -129,6 +127,7 @@ Page({
       },
       success:function(rst){
         var data = rst.data;
+        console.log(data)
         that.setData({'selfGroup':data.self,'otherGroup':data.other})
       }
     })
