@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -66,10 +66,10 @@
 					"query": "order_no=123456&com_id=1&utm=self"
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "开团-02-拼团中",
 					"pathName": "pages/inviteDetail/index",
-					"query": "status=3"
+					"query": "com_id=4&orderNo=2018060702172615283090462&group_id=1"
 				},
 				{
 					"id": -1,

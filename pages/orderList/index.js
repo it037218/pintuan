@@ -28,7 +28,6 @@ Page({
       }else{
         this.setData({ activeIndex: 1 })
       }
-
     }
     this.getUserDetail()
     var that = this;
@@ -132,5 +131,23 @@ Page({
       }
     })
 
+  },
+  getSelfGroup:function(e){
+    console.log(e)
+    var com_id = e.currentTarget.dataset.comid
+    var orderNo = e.currentTarget.dataset.orderno
+
+    wx.redirectTo({
+      url: '/pages/inviteDetail/index?com_id='+com_id+'&orderNo='+orderNo,
+    })
+  },
+  getOtherGroup: function (e) {
+    console.log(e)
+    var com_id = e.currentTarget.dataset.comid
+    var orderNo = e.currentTarget.dataset.orderno
+
+    wx.redirectTo({
+      url: '/pages/invitedDetail/index?com_id=' + com_id + '&orderNo=' + orderNo,
+    })
   }
 })

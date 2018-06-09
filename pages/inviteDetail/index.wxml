@@ -41,26 +41,22 @@
         <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
         <text class='shenfen'>团长</text>
       </view>
-      <view>
-        <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-        <text class='shenfen'>联系TA</text>
-
-      </view>
-      <view>
-        <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-        <text class='shenfen'>联系TA</text>
-
-      </view>
-      <view>
-        <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-        <text class='shenfen'>联系TA</text>
-
-      </view>
-      <view>
-        <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-        <text class='shenfen'>联系TA</text>
-
-      </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <text class='shenfen'>联系TA</text>
+        </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <!-- <text class='shenfen'>联系TA</text> -->
+        </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <!-- <text class='shenfen'>联系TA</text> -->
+        </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <!-- <text class='shenfen'>联系TA</text> -->
+        </view>
     </view>
     <text class='groupNum1'>已开团数  {{commodityInfo.tuan_number}} </text>
     <view class='show-rules'>
