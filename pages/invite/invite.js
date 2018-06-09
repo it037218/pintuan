@@ -2,6 +2,7 @@
 var url = getApp().globalData.Url;
 var domainUrl = getApp().globalData.domainUrl;
 var userInfo = wx.getStorageSync('userInfo')
+console.log(userInfo)
 var openid = wx.getStorageSync('openid')
 
 Page({
@@ -123,6 +124,7 @@ Page({
       },
       success: function (rst) {
         var content = rst.data;
+        console.log(content);
         wx.navigateTo({
           url: '/pages/inviteDetail/index?com_id='+that.data.commodity_id+'&status=1&orderNo=' + content.orderNo,
         })

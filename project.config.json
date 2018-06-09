@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -84,10 +84,10 @@
 					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
 				},
 				{
-					"id": -1,
-					"name": "我的",
-					"pathName": "pages/user/user",
-					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
+					"id": 8,
+					"name": "被邀请开团",
+					"pathName": "pages/invitedDetail/index",
+					"query": "order_no=2018061007050058550&com_id=4"
 				},
 				{
 					"id": -1,

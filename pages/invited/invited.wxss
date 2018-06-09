@@ -1,261 +1,86 @@
-/* pages/inviteDetail/index.wxss */
+/* pages/invite/invite.wxss */
 
 page {
-  position: relative;
+  background-color: #fff;
 }
 
-.detail1-content {
+.cover_img {
   width: 720rpx;
   height: 350rpx;
-  box-shadow: 0px 6rpx 18rpx 0rpx rgba(47, 48, 48, 0.18);
-  margin: 11rpx auto;
-  display: flex;
-  justify-content: center;
-}
-
-.detail1-content .product_img {
-  width: 310rpx;
-}
-
-.detail1-content .product_img image {
-  width: 250rpx;
-  height: 250rpx;
-  margin-top: 50rpx;
-  margin-left: 30rpx;
-  margin-right: 30rpx;
-}
-
-.groupNum {
-  position: absolute;
-  width: 160rpx;
-  height: 160rpx;
-  left: 0;
-  top: 0;
+  margin: 0 auto;
+  border-radius: 5rpx;
   overflow: hidden;
+  box-shadow: 0 0 5rpx 5rpx #eee;
+  margin-bottom: 43rpx;
+  margin-top: 10rpx;
 }
 
-.groupNum>view {
+swiper image {
   width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
-}
-
-.groupNum>view view {
-  position: absolute;
-  /* width: 200%;  */
-  width: 150%;
-  top: 35rpx;
-  left: -54rpx;
-  transform-origin: center;
-  transform: rotate(-45deg);
-  background-color: #f13838;
-  color: #fff;
-  text-align: center;
 }
 
 .title {
-  margin-top: 50rpx;
-  font-size: 36rpx;
-  font-weight: normal;
-  line-height: 48rpx;
-}
-
-.desc {
-  font-size: 30rpx;
-  line-height: 40rpx;
-  letter-spacing: 0px;
-  color: #aaa;
-  margin-top: 20rpx;
-}
-
-.price {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20rpx;
-}
-
-.sale_price {
-  color: #f43530;
-  font-size: 24rpx;
-}
-
-.sale_price .sale_price_num {
-  font-size: 48rpx;
+  width: 650rpx;
+  margin-left: 50rpx;
+  text-align: left;
+  word-wrap: break-word;
+  overflow: hidden;
   font-weight: bold;
-}
-
-.origin_price {
-  font-size: 30rpx;
-  color: #a0a0a0;
-  line-height: 76rpx;
-  text-decoration: line-through;
-}
-
-.order_content {
-  padding-top: 43rpx;
-}
-
-.order_content .status0 {
-  text-align: center;
-}
-
-.order_content .status0 .status-desc {
-  color: #ffbe00;
   font-size: 40rpx;
 }
 
-.order_content .status0 .left-time {
-  display: flex;
-  justify-content: center;
-  margin-top: 45rpx;
-  font-size: 24rpx;
-}
-
-.member_content {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 17rpx;
-}
-
-.member_content >view {
-  width: 100rpx;
-  height: 100rpx;
-  border-radius: 50%;
-  /* overflow: hidden; */
-  position: relative;
-}
-
-.member_content >view image {
-  width: 100%;
-  height: 100%;
-}
-
-.member_content>view:nth-child(1) .shenfen {
-  display: block;
+.title .special-text {
+  float: left;
+  background-color: #e64a4a;
   color: #fff;
-  background-color: #ef3a3f;
-  font-size: 18rpx;
-  position: absolute;
-  bottom: -5rpx;
-  width: 80rpx;
-  text-align: center;
-  left: 50%;
-  margin-left: -40rpx;
-  border-radius: 10rpx;
-  height: 25rpx;
-  line-height: 25rpx;
-}
-
-.member_content>view .shenfen {
-  display: block;
-  color: #fff;
-  background-color: #2bb62f;
-  font-size: 18rpx;
-  position: absolute;
-  bottom: -5rpx;
-  width: 80rpx;
-  text-align: center;
-  left: 50%;
-  margin-left: -40rpx;
-  border-radius: 10rpx;
-  height: 25rpx;
-  line-height: 25rpx;
-}
-
-/*订单确认信息*/
-
-.order_confirm_content {
-  width: 664rpx;
-  margin: 30rpx auto;
-}
-
-.order_confirm_content .content1 {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.order_confirm_content .content1 .content1_detail view {
-  text-align: left;
-}
-
-.order_confirm_content .content1 .content1-detail view:first-child {
-  font-size: 36rpx;
-}
-
-.order_confirm_content .content1 .content1-detail view:nth-child(2) {
-  font-size: 30rpx;
-  color: #7d7d7d;
-  line-height: 48rpx;
-  margin-top: 20rpx;
-}
-
-.order_confirm_content .content1 .content1-detail view:nth-child(3) {
-  font-size: 30rpx;
-  color: #7d7d7d;
-  line-height: 48rpx;
-}
-
-.order_confirm_content .order_price {
-  font-size: 30rpx;
-  color: #7d7d7d;
-  /* line-height: 48rpx; */
-  line-height: 200rpx;
-}
-
-.user_info_confirm>view {
-  width: 100%;
-  border-radius: 10rpx;
-  height: 72rpx;
-  margin-top: 25rpx;
-  line-height: 72rpx;
-  font-size: 28rpx;
-
-}
-.user_info_confirm view input{
-  height: 100%;
-  width: 550rpx;
-  float: right;
-}
-.user_info_confirm .user_info{
-  background:url('https://pintuan.guangxing.club/wximg/name-icon.png') no-repeat;
-  background-size: 50rpx 50rpx;
-  background-position: 20rpx 11rpx;
-    background-color: #f6f2f2;
-}
-.user_info_confirm .phone{
-  background:url('https://pintuan.guangxing.club/wximg/phone-icon.png') no-repeat;
-  background-size: 50rpx 50rpx;
-  background-position: 20rpx 11rpx;
-    background-color: #f6f2f2;
-}
-.user_info_confirm .wx_id{
-  background:url('https://pintuan.guangxing.club/wximg/wx-icon.png') no-repeat;
-  background-size: 50rpx 50rpx;
-  background-position: 20rpx 11rpx;
-    background-color: #f6f2f2;
-}
-.user_info_confirm .address{
-  background:url('https://pintuan.guangxing.club/wximg/address_icon.png') no-repeat;
-  background-size: 50rpx 50rpx;
-  background-position: 20rpx 34rpx;
-    background-color: #f6f2f2;
-    height: 118rpx;
-}
-.user_info_confirm .address input{
-  width: 480rpx;
-}
-.user_info_confirm .address .edit{
-  height: 50rpx;
-  width: 50rpx;
-  float: right;
+  padding: 0 25rpx;
   margin-right: 20rpx;
-   background:url('https://pintuan.guangxing.club/wximg/address_edit_icon.png') no-repeat;
-   background-size: 50rpx 50rpx; 
-   margin-top: 34rpx;
-  /*background-position: 20rpx 34rpx;
-    background-color: #f6f2f2;
-    height: 118rpx;
-    float: right; */
 }
+
+.desc {
+  padding: 0 50rpx;
+  font-size: 30rpx;
+  color: #aaa;
+  margin-top: 33rpx;
+  line-height: 40rpx;
+}
+
+.price-content {
+  padding: 0 50rpx;
+  overflow: hidden;
+}
+
+.price-content text {
+  height: 60rpx;
+  display: table-cell;
+  vertical-align: bottom;
+  line-height: 60rpx;
+}
+
+.price-content text:nth-child(1) {
+  float: left;
+  font-size: 48rpx;
+  color: #f43530;
+  font-weight: bold;
+}
+
+.price-content text:nth-child(2) {
+  float: left;
+  font-size: 24rpx;
+  color: #f43530;
+}
+
+.price-content text:nth-child(3) {
+  float: left;
+  font-size: 28rpx;
+  color: #898989;
+  text-decoration: line-through;
+}
+
+.price-content text:nth-child(4) {
+  float: right;
+  font-size: 28rpx;
+  color: #898989;
+}
+
+/*订单状态*/

@@ -81,20 +81,20 @@
       <view class='content1'>
         <view class='content1-detail'>
           <view>订单详情</view>
-          <view>{{commodityInfo.tuan_number}}</view>
+          <view>{{commodityInfo.name}}</view>
           <view>订单号：{{orderNo}}</view>
         </view>
         <view class='order_price'>￥{{commodityInfo.tuan_price}}</view>
       </view>
       <view class='user_info_confirm'>
         <view class='user_info'>
-          <input placeholder='请输入您的姓名' value='{{userInfo.name}}'></input>
+          <input placeholder='请输入您的姓名' value='{{userInfo.name}}' bindblur="saveUserName"></input>
         </view>
         <view class='phone'>
-          <input placeholder='请输入您的手机号' value='{{userInfo.mobile}}'></input>
+          <input placeholder='请输入您的手机号' value='{{userInfo.mobile}}' bindblur="saveUserMobile"></input>
         </view>
         <view class='wx_id'>
-          <input placeholder='请输入您的微信号' value='{{userInfo.wx_id}}'></input>
+          <input placeholder='请输入您的微信号' value='{{userInfo.wx_id}}' bindblur="saveUserWxid"></input>
         </view>
 
         <view class='address' wx:if="{{address.id}}">
@@ -118,7 +118,7 @@
       <view>
         取消
       </view>
-      <view>
+      <view bindtap='payment'>
         去支付
       </view>
     </view>

@@ -80,9 +80,10 @@ Page({
       console.log(res.target)
     }
     var shareImgUrl = this.data.shareImgUrl+"?v=3"
+    var that = this;
     return {
       title: '一起开团吧',
-      path: 'pages/invite/invite?com_id=1',
+      path: 'pages/invitedDetail/index?com_id='+that.data.com_id,
       imageUrl: shareImgUrl
     }
   },

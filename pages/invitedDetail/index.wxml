@@ -1,2 +1,144 @@
-<!--pages/invitedDetail/index.wxml-->
-<text>pages/invitedDetail/index.wxml</text>
+<!--开团订单详情-->
+<view>
+  <view class='groupNum'>
+    <view>
+      <view>5人团</view>
+    </view>
+  </view>
+  <view class='detail1'>
+    <view class='detail1-content'>
+      <view class='product_img'>
+        <image src='{{commodityInfo.images}}'></image>
+      </view>
+      <view style='padding:0 15rpx;box-sizing:border-box'>
+        <view class='title'>{{commodityInfo.name}}</view>
+        <view class='desc'>{{commodityInfo.description}}</view>
+        <view class='price'>
+          <view class='sale_price'>
+            <text class='sale_price_num'>￥{{commodityInfo.tuan_price}}</text> 拼团价</view>
+          <view class='origin_price'>￥{{commodityInfo.market_price}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view wx:if="{{orderStatus==2002 || orderStatus==2003 || orderStatus == 2004 || orderStatus == 2005 || orderStatus==2000}}">
+    <view class='order_content'>
+      <!--待支付-->
+      <view class='status0'>
+        <text class='status-desc' wx:if="{{orderStatus == 2002}}">待支付</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2003}}">拼团中 已有两人拼团成功</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2004}}">已结束  拼团成功</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2005}}">拼团失败</text>
+
+        <!-- <view class='left-time'>
+          <view>支付剩余时间</view>
+          <view>28:20</view>
+        </view> -->
+      </view>
+    </view>
+    <view class='member_content'>
+      <view>
+        <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+        <text class='shenfen'>团长</text>
+      </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <text class='shenfen'>联系TA</text>
+        </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <!-- <text class='shenfen'>联系TA</text> -->
+        </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <!-- <text class='shenfen'>联系TA</text> -->
+        </view>
+        <view>
+          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+          <!-- <text class='shenfen'>联系TA</text> -->
+        </view>
+    </view>
+    <text class='groupNum1'>已开团数  {{commodityInfo.tuan_number}} </text>
+    <view class='show-rules'>
+      <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
+        拼团玩法
+        <text class='icon '></text>
+      </view>
+      <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
+        游戏规则 游戏规则游戏规则游戏规则游戏规则 游戏规则 游戏规则 游戏规则 游戏规则
+      </view>
+    </view>
+    <view class='show-details'>
+      <view>
+        商品详情
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{orderStatus==2001}}">
+    <view class='order_confirm_content'>
+
+      <view class='content1'>
+        <view class='content1-detail'>
+          <view>订单详情</view>
+          <view>{{commodityInfo.name}}</view>
+          <view>订单号：{{orderNo}}</view>
+        </view>
+        <view class='order_price'>￥{{commodityInfo.tuan_price}}</view>
+      </view>
+      <view class='user_info_confirm'>
+        <view class='user_info'>
+          <input placeholder='请输入您的姓名' value='{{userInfo.name}}' bindblur="saveUserName"></input>
+        </view>
+        <view class='phone'>
+          <input placeholder='请输入您的手机号' value='{{userInfo.mobile}}' bindblur="saveUserMobile"></input>
+        </view>
+        <view class='wx_id'>
+          <input placeholder='请输入您的微信号' value='{{userInfo.wx_id}}' bindblur="saveUserWxid"></input>
+        </view>
+
+        <view class='address' wx:if="{{address.id}}">
+          <view class='edit' bindtap='editAddress' data-id="{{address.id}}"></view>
+          <input placeholder='dddd ' value='{{address.prince}}  {{address.city}}  {{address.district}} {{address.street}}'></input>
+        </view>
+
+        <view class='address' wx:if="{{!address.id}}">
+          <view class='edit' bindtap='editAddress' data-id=""></view>
+          <input placeholder='请输入您的地址'></input>
+        </view>
+      </view>
+    </view>
+
+  </view>
+
+
+  <!--待支付-->
+  <view class='option-content'>
+    <view class='status2' wx:if="{{orderStatus==2002}}">
+      <view>
+        取消
+      </view>
+      <view bindtap='payment'>
+        去支付
+      </view>
+    </view>
+    <!--微信支付-->
+    <view class='status3' wx:if="{{orderStatus==2001}}" bindtap='payment'>
+      <view>微信支付 ￥299元</view>
+    </view>
+    <!--邀请好友拼团-->
+    <view class='status4' wx:if="{{orderStatus==2003}}">
+      <view>邀请好友拼团</view>
+    </view>
+    <view class='status4' wx:if="{{orderStatus==2000}}" bindtap='joinIn'>
+      <view>参与拼团</view>
+    </view>
+    <!--拼团成功-->
+    <view class='status5' wx:if="{{orderStatus==2005}}">
+      <view>拼团已成功 去查看你的成员们吧</view>
+    </view>
+    <view class='status6' wx:if="{{orderStatus==2004}}">
+      <view>一键重新开团</view>
+    </view>
+  </view>
+</view>

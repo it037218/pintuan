@@ -1,7 +1,9 @@
-var url = getApp().globalData.Url////dd;/
-var userInfo = wx.getStorageSync('userInfo')
-var openid = wx.getStorageSync('openid')
+// pages/invite/invite.js
+var url = getApp().globalData.Url;
 var domainUrl = getApp().globalData.domainUrl;
+var userInfo = wx.getStorageSync('userInfo')
+console.log(userInfo)
+var openid = wx.getStorageSync('openid')
 
 Page({
 
@@ -9,30 +11,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-    'showRuleState': false,
-    'showRuleContent': false,
-    'orderStatus': 2001,
-    'commodityInfo': {},
-    'orderNo': '',
-    'userInfo': {},
-    'address': {
-      'prince': '',
-      'city': '',
-      'district': '',
-      'street': '',
-      'id': ''
-    }
+    imgUrls: '',
+    productInfo: {},
+    productStatus: 0,
+    loginStatus: false,
+    userStatus: userInfo.status,
+    commodity_id: '',
+    userOrderStatus: '',
+    utm: 'self'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // this.setData({orderNo:options.orderNo })
-    this.getCommodityInfo(options.com_id)
-    this.getOrderInfo(options.orderNo)
-    this.getUserInfo()
-    // this.getGroupMember(options.orderNo)
+    if ('com_id' in options) {
+      this.getProductDetail(options.com_id)
+    } else {
+      this.getProductDetail('')
+    }
+    if ('utm' in options) {
+      this.setData({ 'utm': options.utm })
+    }
+
+    // this.getProductDetail(options.com_id);
+    // this.setData({ commodity_id: options.com_id });
   },
 
   /**
@@ -46,7 +49,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    this.getUserInfo()
 
   },
 
@@ -81,117 +83,35 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  },
-  onChangeShowState: function () {
-    var state = this.data.showRuleState;
-    this.setData({ 'showRuleState': !state, 'showRuleContent': !state })
-  },
-  getCommodityInfo: function (com_id) {
+  // },
+  getProductDetail: function (id) {
     var that = this;
     wx.request({
       url: url + '/wx/getProductInfo',
       data: {
-        com_id: com_id
-      },
-      success: function (rst) {
-        console.log(rst.data)
-        var content = rst.data;
-        content.images = domainUrl + content.images;
-        that.setData({ 'commodityInfo': rst.data })
-      }
-    })
-  },
-  getUserInfo: function () {
-    var that = this;
-    wx.request({
-      url: url + '/wx/getUserDetail',
-      data: {
-        openid: openid
-      },
-      success: function (rst) {
-        var content = rst.data;
-        if (content.success == 1) {
-          var userInfo = content.data.userInfo;
-          var address = content.data.address;
-          that.setData({ userInfo: userInfo })
-          if (address) {
-            that.setData({ address: address })
-          }
-
-        }
-      }
-    })
-
-  },
-  editAddress: function (e) {
-    console.log(e)
-    var address_id = e.target.dataset.id;
-    console.log(address_id)
-    wx.navigateTo({
-      url: '/pages/address/address?openid=' + openid + '&address_id=' + address_id,
-    })
-  },
-  getOrderInfo: function (orderNo) {
-    var that = this;
-    wx.request({
-      url: url + '/wx/getOrderInfo',
-      data: {
-        openid: openid,
-        orderNo: orderNo
+        com_id: id,
       },
       success: function (rst) {
         var content = rst.data
         console.log(content)
+        that.setData({ 'commodity_id': content.id })
+        // that.checkUserGroup(content.id)
 
-        if (content.data != null) {
-          var orderStatus = content.data.pay_status
-          // that.setData({'orderStatus': orderStatus})
-        }
+        content.images = domainUrl + content.images
+        that.setData({ productInfo: content })
       }
     })
   },
-  payment: function () {
-    var that = this;
-    wx.request({
-      url: url + '/wx/payForOrder',
-      data: {
-        order_no: that.data.orderNo,
-        openid: openid
-      },
-      success: function (rst) {
-        console.log(rst.data);
-        var data = rst.data.parameters
-        console.log(data)
-        wx.requestPayment({
-          timeStamp: data.timeStamp,
-          nonceStr: data.nonceStr,
-          package: data.package,
-          signType: data.signType,
-          paySign: data.paySign,
-          success: function (res) {
-            that.setData({ 'orderStatus': 2003 })
-          },
-          fail: function (res) {
-            that.setData({ 'orderStatus': '2002' })
 
-          }
-        })
-      }
-    })
+  onChangeShowState: function () {
+    var state = this.data.showRuleState;
+    this.setData({ 'showRuleState': !state, 'showRuleContent': !state })
+
   },
-  getGroupMember: function (order_no) {
-    var that = this;
-    wx.request({
-      url: url + '/wx/getGroupMember',
-      data: {
-        order_no: order_no
-      },
-      success: function (rst) {
-        console.log(rst)
-      }
-    })
+  bindGetUserInfo: function (e) {
+    console.log(e.detail.userInfo)
   },
   payForOrder: function () {
     var that = this;
@@ -200,14 +120,60 @@ Page({
       data: {
         'commodity_id': that.data.commodity_id,
         'openid': openid,
-        'utm': 'other'
+        'utm': 'self'
       },
       success: function (rst) {
         var content = rst.data;
+        console.log(content);
         wx.navigateTo({
           url: '/pages/inviteDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo,
         })
       }
     })
   },
+  checkUserOrder: function (com_id) {
+    wx.request({
+      url: url + '/wx/checkUserOrder',
+      data: {
+        openid: openid,
+        com_id: com_id,
+        identity: '1'
+      },
+      success: function (rst) {
+
+      }
+    })
+  },
+  checkUserGroup: function (com_id) {
+    wx.request({
+      url: url + '/wx/checkUserGroup',
+      data: {
+        com_id: com_id,
+        openid: openid
+      },
+      success: function (rst) {
+        var self = rst.data.self.length;
+        var other = rst.data.other.length;
+        console.log(self)
+        console.log(other)
+
+        if (self && !other) {
+          console.log('self')
+          wx.redirectTo({
+            url: '/pages/orderList/index?utm=self',
+          })
+        } else if (!self && other) {
+          console.log('other')
+
+          wx.redirectTo({
+            url: '/pages/orderList/index?utm=other',
+          })
+        }
+
+      }
+    })
+  }
+
+
+
 })

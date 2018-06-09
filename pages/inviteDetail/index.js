@@ -22,15 +22,18 @@ Page({
       'street': '',
       'id': ''
     },
-    'memberList':[]
+    'memberList':[],
+    'com_id':''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.getCommodityInfo(options.com_id)
     this.getOrderInfo(options.orderNo)
+    this.setData({'orderNo':options.orderNo,'com_id':options.com_id})
     this.getUserInfo()
     this.getGroupMember(options.group_id)
   },
@@ -153,6 +156,45 @@ Page({
       }
     })
   },
+  saveUserName:function(e){
+    var name = e.detail.value
+    wx.request({
+      url: url+'/wx/saveUserInfo',
+      data:{
+        openid: openid,
+        name:name
+      },
+      success:function(rst){
+        console.log(rst)
+      }
+    })
+  },
+  saveUserMobile: function (e) {
+    var mobile = e.detail.value
+    wx.request({
+      url: url + '/wx/saveUserInfo',
+      data: {
+        openid:openid,
+        mobile: mobile
+      },
+      success: function (rst) {
+        console.log(rst)
+      }
+    })
+  },
+  saveUserWxid: function (e) {
+    var wx_id = e.detail.value
+    wx.request({
+      url: url + '/wx/saveUserInfo',
+      data: {
+        openid: openid,
+        wx_id: wx_id
+      },
+      success: function (rst) {
+        console.log(rst)
+      }
+    })
+  },
   payment: function () {
     var that = this;
     wx.request({
@@ -173,6 +215,9 @@ Page({
           paySign: data.paySign,
           success: function (res) {
             that.setData({ 'orderStatus': 2003 })
+            wx.redirectTo({
+              url: '/pages/payresult/payresult?order_no='+that.data.orderNo+'&com_id='+that.data.com_id,
+            })
           },
           fail: function (res) {
             that.setData({ 'orderStatus': '2002' })

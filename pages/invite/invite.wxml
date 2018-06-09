@@ -43,10 +43,10 @@
   <!--一键开团-->
   <view class='option-content'>
     <view class='status0' wx:if="{{productStatus == 0}}">
-      <view wx:if="{{!userStatus}}">
+      <view wx:if="{{userStatus==0}}">
         <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;'>￥299 一键开团</button>
       </view>
-      <view wx:if="{{userStatus}}" bindtap='payForOrder'>￥299 一键开团</view>
+      <view wx:if="{{userStatus==1}}" bindtap='payForOrder'>￥299 一键开团</view>
     </view>
 
     <!--支付未完成-->
