@@ -1,2 +1,62 @@
-<!--pages/invited/invited.wxml-->
-<text>pages/invited/invited.wxml</text>
+<view class='cover_img'>
+  <image src='{{productInfo.images}}'></image>
+</view>
+<view>
+  <view class='title'>
+    <view class='special-text'>5人团</view>
+    <view>{{productInfo.name}}</view>
+  </view>
+  <view class='desc'>
+    {{productInfo.description}}
+  </view>
+  <view class='price-content'>
+      <text>￥{{productInfo.tuan_price}}</text>
+      <text style='margin-left:20rpx;'>拼团价</text>
+      <text>￥{{productInfo.market_price}}</text>
+    <text>已开团 {{productInfo.tuan_number}}</text>
+    </view>
+  <view class='show-rules'>
+    <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
+      拼团玩法
+      <text class='icon '></text>
+    </view>
+    <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
+      游戏规则 游戏规则游戏规则游戏规则游戏规则 游戏规则 游戏规则 游戏规则 游戏规则
+    </view>
+  </view>
+
+  <view class='show-details'>
+    <view>
+      商品详情
+    </view>
+  </view>
+
+</view>
+
+  <!--一键开团-->
+  <view class='option-content'>
+    <view class='status0' wx:if="{{productStatus == 0}}">
+      <view wx:if="{{!userStatus}}">
+        <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;'>￥299 一键开团</button>
+      </view>
+      <view wx:if="{{userStatus}}" bindtap='payForOrder'>￥299 一键开团</view>
+    </view>
+
+    <!--支付未完成-->
+    <view class='status1' wx:if="{{productStatus == 1}}">
+      <view style='display:inline-block'>支付未完成 继续开团</view>
+      <view class='count-down'>
+        <text class='clock'></text>
+        <text>28:26</text>
+      </view>
+    </view>
+    <!--待支付-->
+    <view class='status2' wx:if="{{productInfo.status == 2}}">
+      <view>
+        取消
+      </view>
+      <view>
+        去支付
+      </view>
+    </view>
+  </view>

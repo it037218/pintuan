@@ -6,7 +6,8 @@
     "pages/address/address",
     "pages/payresult/payresult",
     "pages/inviteDetail/index",
-    "pages/invitedDetail/index"
+    "pages/invitedDetail/index",
+    "pages/orderList/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

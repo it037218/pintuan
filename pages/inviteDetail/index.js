@@ -1,6 +1,7 @@
 var url = getApp().globalData.Url////dd;/
 var userInfo = wx.getStorageSync('userInfo')
 var openid = wx.getStorageSync('openid')
+var domainUrl = getApp().globalData.domainUrl;
 
 Page({
 
@@ -27,10 +28,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ orderStatus: options.status,orderNo:options.orderNo })
+    // this.setData({orderNo:options.orderNo })
     this.getCommodityInfo(options.com_id)
     this.getOrderInfo(options.orderNo)
     this.getUserInfo()
+    // this.getGroupMember(options.orderNo)
   },
 
   /**
@@ -96,7 +98,7 @@ Page({
       success:function(rst){
         console.log(rst.data)
         var content = rst.data;
-        content.images = url+content.images;
+        content.images = domainUrl+content.images;
         that.setData({'commodityInfo':rst.data})
       }
     })
@@ -132,6 +134,7 @@ Page({
     })
   },
   getOrderInfo:function(orderNo){
+    var that = this;
     wx.request({
       url: url+'/wx/getOrderInfo',
       data:{
@@ -141,9 +144,53 @@ Page({
       success:function(rst){
         var content = rst.data
         console.log(content)
+
+        if(content.data != null){
+        var orderStatus = content.data.pay_status
+        // that.setData({'orderStatus': orderStatus})
+        }
       }
     })
+  },
+  payment:function(){
+    var that = this;
+    wx.request({
+      url: url +'/wx/payForOrder',
+      data:{
+        order_no: that.data.orderNo,
+        openid:openid
+      },
+      success:function(rst){
+        console.log(rst.data);
+        var data = rst.data.parameters
+        console.log(data)
+        wx.requestPayment({
+          timeStamp: data.timeStamp,
+          nonceStr: data.nonceStr,
+          package: data.package,
+          signType: data.signType,
+          paySign: data.paySign,
+          success:function(res){
+            that.setData({'orderStatus':2003})
+          },
+          fail:function(res){
+            that.setData({'orderStatus':'2002'})
 
-
+          }
+        })
+      }
+    })
+  },
+  getGroupMember:function(order_no){
+    var that = this;
+    wx.request({
+      url: url+'/wx/getGroupMember',
+      data:{
+        order_no:order_no
+      },
+      success:function(rst){
+        console.log(rst)
+      }
+    })
   }
 })

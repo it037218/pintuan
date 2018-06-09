@@ -7,3 +7,81 @@ page{
   height: 228rpx;
   background-size: contain;
 }
+.content{
+  background: url('https://pintuan.guangxing.club/wximg/kuang.png') no-repeat;
+  /* height: 228rpx; */
+	width: 665rpx;
+  margin: 0 auto;
+  height: 715rpx;
+   background-size: cover; 
+}
+.shape-2{
+  margin-top: 110rpx;
+}
+.shape-3{
+  margin-top: 100rpx;
+}
+.shape-2 button{
+width: 520rpx;
+	height: 88rpx;
+  color: #fff;
+  background-color: #E75053
+}
+.shape-3 button{
+width: 520rpx;
+	height: 88rpx;
+  color: #fff;
+  background-color: #FDBD2C
+}
+.share-content{
+  position: fixed;
+  width: 750rpx;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.4);
+}
+.share-content .share-option{
+  position: absolute;
+  left: 0;
+  bottom: 120rpx;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+.share-content .share-option image{
+  width: 150rpx;
+  height: 150rpx;
+}
+.share-content .share-option view{
+  text-align: center;
+}
+.share-content .share-option view view{
+  color: #fff;
+  text-align: center;
+  	font-size: 30rpx;
+}
+.share-content .share-cancel{
+  position: absolute;
+  left:0;
+  bottom: 11rpx;
+  text-align: center;
+  width: 100%;
+}
+.share-content .share-cancel image{
+  width: 48rpx;
+  height: 48rpx;
+}
+.s-1 .s-1-1{
+  display: block;
+  background: url('https://pintuan.guangxing.club/wximg/haoyou.png?v=2') no-repeat;
+  width: 150rpx;
+  height: 150rpx;
+  overflow:hidden;
+  padding: 0;
+  border: none!important;
+  margin-bottom: 18rpx;
+  background-size: contain;
+  background-color: transparent;
+  border-radius: 50%;
+}

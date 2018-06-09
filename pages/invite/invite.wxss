@@ -10,8 +10,9 @@ page {
   margin: 0 auto;
   border-radius: 5rpx;
   overflow: hidden;
-  box-shadow: 0 0 5rpx 5rpx #ccc;
+  box-shadow: 0 0 5rpx 5rpx #eee;
   margin-bottom: 43rpx;
+  margin-top: 10rpx;
 }
 
 swiper image {

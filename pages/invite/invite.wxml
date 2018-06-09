@@ -1,5 +1,12 @@
 <view class='cover_img'>
-  <image src='{{productInfo.images}}'></image>
+  <swiper indicator-dots=""
+  autoplay="true" interval="1000" duration="">
+  <block wx:for="{{productInfo.adImages}}">
+    <swiper-item>
+      <image src="https://pintuan.guangxing.club{{item}}" class="slide-image"/>
+    </swiper-item>
+  </block>
+</swiper>
 </view>
 <view>
   <view class='title'>

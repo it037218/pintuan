@@ -16,18 +16,26 @@ Page({
     loginStatus: false,
     userStatus: userInfo.status,
     commodity_id: '',
-    userOrderStatus:''
+    userOrderStatus:'',
+    utm:'self'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if('com_id' in options){
+      this.getProductDetail(options.com_id)
+    } else {
+      this.getProductDetail('')
+    }
+    if('utm' in options){
+      this.setData({'utm':options.utm})
+    }
 
-    this.setData({ 'productStatus': options.status })
-    this.getProductDetail(options.com_id);
-    this.setData({ commodity_id: options.com_id });
-    this.checkUserOrder(options.com_id)
+    // this.getProductDetail(options.com_id);
+    // this.setData({ commodity_id: options.com_id });
+    // this.checkUserOrder(options.com_id)
   },
 
   /**
@@ -75,19 +83,19 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  // onShareAppMessage: function () {
 
-  },
+  // },
   getProductDetail: function (id) {
     var that = this;
     wx.request({
       url: url + '/wx/getProductInfo',
       data: {
         com_id: id,
-        openid: openid
       },
       success: function (rst) {
         var content = rst.data
+        console.log(content)
         content.images = domainUrl + content.images
         that.setData({ productInfo: content })
       }
@@ -108,7 +116,8 @@ Page({
       url: url + '/wx/createOrder',
       data: {
         'commodity_id': that.data.commodity_id,
-        'openid': openid
+        'openid': openid,
+        'utm':that.data.utm
       },
       success: function (rst) {
         var content = rst.data;
@@ -119,7 +128,17 @@ Page({
     })
   },
   checkUserOrder:function(com_id){
-    console.log(com_id)
+     wx.request({
+       url: url+'/wx/checkUserOrder',
+       data:{
+         openid:openid,
+         com_id:com_id,
+         identity:'1'
+       },
+       success:function(rst){
+        
+       }
+     })
   }
 
 

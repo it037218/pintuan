@@ -45,13 +45,13 @@
 					"id": 1,
 					"name": "开团-02-订单详情-待支付",
 					"pathName": "pages/inviteDetail/index",
-					"query": "status=1&orderNo=201806070225231528309523&commodity_id=1"
+					"query": "status=1&orderNo=2018060702172615283090462&commodity_id=1"
 				},
 				{
 					"id": 2,
 					"name": "开团-01-商品详情 - 一键开团",
 					"pathName": "pages/invite/invite",
-					"query": "status=0&com_id=1"
+					"query": ""
 				},
 				{
 					"id": 3,
@@ -60,22 +60,16 @@
 					"query": "status=1"
 				},
 				{
-					"id": 4,
-					"name": "填写个人地址",
-					"pathName": "pages/address/address",
-					"query": "status=1&openid=osQX64qNqo31C9LffehUmQBOjUUw"
-				},
-				{
 					"id": -1,
 					"name": "填写个人信息",
 					"pathName": "pages/inviteDetail/index",
 					"query": "status=2"
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "开团-02-支付成功",
 					"pathName": "pages/payresult/payresult",
-					"query": "status=1"
+					"query": "order_no=123456&com_id=1&utm=self"
 				},
 				{
 					"id": -1,
@@ -94,6 +88,30 @@
 					"name": "开团-02-拼团失败",
 					"pathName": "pages/inviteDetail/index",
 					"query": "status=5"
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/invite/invite",
+					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/user/user",
+					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
+				},
+				{
+					"id": -1,
+					"name": "拼团列表",
+					"pathName": "pages/orderList/index",
+					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
+				},
+				{
+					"id": -1,
+					"name": "拼团列表",
+					"pathName": "pages/orderList/index",
+					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
 				}
 			]
 		}

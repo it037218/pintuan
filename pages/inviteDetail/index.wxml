@@ -21,19 +21,19 @@
       </view>
     </view>
   </view>
-  <view wx:if="{{orderStatus==0 || orderStatus==3 || orderStatus==4 || orderStatus == 5}}">
+  <view wx:if="{{orderStatus==2002 || orderStatus==2003 || orderStatus == 2004 || orderStatus == 2005}}">
     <view class='order_content'>
       <!--待支付-->
       <view class='status0'>
-        <text class='status-desc' wx:if="{{orderStatus == 0}}">待支付</text>
-        <text class='status-desc' wx:if="{{orderStatus == 0}}">拼团中 已有两人拼团成功</text>
-        <text class='status-desc' wx:if="{{orderStatus == 4}}">已结束  拼团成功</text>
-        <text class='status-desc' wx:if="{{orderStatus == 5}}">拼团失败</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2002}}">待支付</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2003}}">拼团中 已有两人拼团成功</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2004}}">已结束  拼团成功</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2005}}">拼团失败</text>
 
-        <view class='left-time'>
+        <!-- <view class='left-time'>
           <view>支付剩余时间</view>
           <view>28:20</view>
-        </view>
+        </view> -->
       </view>
     </view>
     <view class='member_content'>
@@ -79,7 +79,7 @@
     </view>
   </view>
 
-  <view wx:if="{{orderStatus==1}}">
+  <view wx:if="{{orderStatus==2001}}">
     <view class='order_confirm_content'>
 
       <view class='content1'>
@@ -118,7 +118,7 @@
 
   <!--待支付-->
   <view class='option-content'>
-    <view class='status2' wx:if="{{orderStatus==0}}">
+    <view class='status2' wx:if="{{orderStatus==2002}}">
       <view>
         取消
       </view>
@@ -127,20 +127,19 @@
       </view>
     </view>
     <!--微信支付-->
-    <view class='status3' wx:if="{{orderStatus==1}}">
+    <view class='status3' wx:if="{{orderStatus==2001}}" bindtap='payment'>
       <view>微信支付 ￥299元</view>
     </view>
     <!--邀请好友拼团-->
-    <view class='status4' wx:if="{{orderStatus==3}}">
+    <view class='status4' wx:if="{{orderStatus==2003}}">
       <view>邀请好友拼团</view>
     </view>
     <!--拼团成功-->
-    <view class='status5' wx:if="{{orderStatus==4}}">
+    <view class='status5' wx:if="{{orderStatus==2005}}">
       <view>拼团已成功 去查看你的成员们吧</view>
     </view>
-    <view class='status6' wx:if="{{orderStatus==5}}">
+    <view class='status6' wx:if="{{orderStatus==2004}}">
       <view>一键重新开团</view>
     </view>
-
   </view>
 </view>

@@ -1,5 +1,6 @@
 // pages/user/user.js
 var url = getApp().globalData.Url;
+var sliderWidth =89; // 需要设置slider的宽度，用于计算中间位置
 var openid = wx.getStorageSync('openid')
 
 Page({
@@ -8,14 +9,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    'userInfo': {}
+    'userInfo': {},
+    tabs: ["我发起的拼团", "我参与的拼团"],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0,
+    selfGroup:[],
+    ohterGroup:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if('utm' in options){
+      if(options.utm == 'self'){
+        this.setData({activeIndex: 1})
+      }else{
+        this.setData({ activeIndex: 0 })
+      }
+
+    }
+
+
     this.getUserDetail()
+    var that = this;
+    this.getUserGroupList();
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
+      }
+    });
   },
 
   /**
@@ -70,14 +98,11 @@ Page({
     var that = this;
     wx.request({
       url: url + '/wx/getUserInfo',
-      data:{
-        openid:openid
-      },
       success: function (rst) {
         var content = rst.data;
         var info = {};
 
-        console.log(content.phone)
+        // console.log(content.phone)
         info.tel = content.phone
         info.wx_id = content.wx_id
         info.address = content.address
@@ -86,6 +111,25 @@ Page({
         console.log(info)
         that.setData({ userInfo:info})
 
+      }
+    })
+  },
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
+  },
+  getUserGroupList:function(){
+    var that = this;
+    wx.request({
+      url: url +'/wx/getUserGroupList',
+      data:{
+        openid:openid
+      },
+      success:function(rst){
+        var data = rst.data;
+        that.setData({'selfGroup':data.self,'otherGroup':data.other})
       }
     })
 

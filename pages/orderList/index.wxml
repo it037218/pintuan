@@ -1,0 +1,91 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+          <view wx:for="{{selfGroup}}" wx:for-item="group">
+            <view class='commodity_item'>
+              <view class='groupNum'>
+                <view>
+                  <view>5人团</view>
+                </view>
+              </view>
+
+              <view class='commodity_wrapper'>
+
+                <view class='cover_img'>
+                  <image src='https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1176594021,836381879&fm=173&app=25&f=JPEG?w=218&h=146&s=D38601E2844326E4C6B1AA290300F047'>
+                  </image>
+                </view>
+                <view class='commodity_content'>
+                  <view class='name'>这里是商品名称以及瞩目的标题</view>
+                  <view class='group_number'>"参团人数：3人"</view>
+
+                  <view class='desc'>"开团日期：2018-05-21"</view>
+                  <view class='other'>
+                    <view>
+                      <text>￥299</text>
+                      <text>拼团价</text>
+                    </view>
+                    <view>查看详情></view>
+                  </view>
+
+                </view>
+
+              </view>
+
+            </view>
+          </view>
+
+
+        </view>
+        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+
+          <view wx:for="{{otherGroup}}" wx:for-item="group">
+            <view class='commodity_item'>
+              <view class='groupNum'>
+                <view>
+                  <view>5人团</view>
+                </view>
+              </view>
+
+              <view class='commodity_wrapper'>
+
+                <view class='cover_img'>
+                  <image src='https://ss0.baidu.com/6ONWsjip0QIZ8tyhnq/it/u=1176594021,836381879&fm=173&app=25&f=JPEG?w=218&h=146&s=D38601E2844326E4C6B1AA290300F047'>
+                  </image>
+                </view>
+                <view class='commodity_content'>
+                  <view class='name'>这里是商品名称以及瞩目的标题</view>
+                  <view class='group_number'>"参团人数：3人"</view>
+
+                  <view class='desc'>"开团日期：2018-05-21"</view>
+                  <view class='other'>
+                    <view>
+                      <text>￥299</text>
+                      <text>拼团价</text>
+                    </view>
+                    <view>查看详情></view>
+                  </view>
+
+                </view>
+
+              </view>
+
+            </view>
+          </view>
+
+
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

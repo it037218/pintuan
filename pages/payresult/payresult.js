@@ -1,18 +1,31 @@
 // pages/payresult/payresult.js
+// pages/user/user.js
+var url = getApp().globalData.Url;
+var openid = wx.getStorageSync('openid')
+var domainUrl = getApp().globalData.domainUrl;
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    'orderNo':'',
+    'com_id':'',
+    'utm':'',
+    'showShare':false,
+    'shareImgUrl':''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    var order_no = options.order_no;
+    var com_id = options.com_id;
+    var utm = options.utm;
+    this.setData({'orderNo':order_no,'com_id':com_id,'utm':utm})
+    this.getCommodityInfo(com_id)
   },
 
   /**
@@ -60,7 +73,43 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
+  onShareAppMessage: function (res) {
+    console.log(res)
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    var shareImgUrl = this.data.shareImgUrl+"?v=3"
+    return {
+      title: '一起开团吧',
+      path: 'pages/invite/invite?com_id=1',
+      imageUrl: shareImgUrl
+    }
+  },
+  shareToFriend:function(){
+    this.setData({'showShare':true})
+  },
+  hideShare: function () {
+    this.setData({ 'showShare': false })
+  },
+  shareToApp:function(){
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+  },
+  shareToTimeLine:function(){
+
+  },
+  getCommodityInfo:function(com_id){
+    var that = this;
+    wx.request({
+      url: url+'/wx/getProductInfo',
+      data:{
+        'com_id':com_id
+      },
+      success:function(rst){
+        that.setData({'shareImgUrl': domainUrl +'/' +rst.data.images})
+      }
+    })
   }
 })

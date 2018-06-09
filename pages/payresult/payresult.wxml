@@ -1,11 +1,41 @@
 <view>
   <view class='bg'>
-  
-</view>
 
+  </view>
+  <view style='position:absolute;top:93rpx;left:0;width:100%'>
+    <view class='content'>
+      <view class='shape-1'>
+        <view style='text-align:center;'>
+          <image src='https://pintuan.guangxing.club/wximg/pay_success.png' style='width:72rpx;height:72rpx;margin-top:40rpx;'></image>
+        </view>
+        <view style='text-align:center;margin-top:13rpx;font-size:60rpx;color:#e94f4f;line-height:60rpx;'>支付成功</view>
+        <view style='text-align:center;margin-top:13rpx;font-size:30rpx;color:#7cc04b'>PAYMENT SUCCEED</view>
+      </view>
+      <view class='shape-2'>
+        <button bindtap='shareToFriend'>
+          邀请好友
+        </button>
+      </view>
+      <view class='shape-3'>
+        <button>拼团详情</button>
 
+      </view>
+    </view>
+  </view>
 
-
-
-
+  <view class='share-content' wx:if="{{showShare}}">
+    <view class='share-option'>
+      <view class='s-1'  >
+        <button class='s-1-1' open-type='share'></button>
+        <view>微信好友</view>
+      </view>
+      <view class='s-2' bindtap='shareToTimeLine'>
+       <image src='https://pintuan.guangxing.club/wximg/pengyouquan.png?v=1'></image>
+        <view>分享生成图片</view>
+      </view>
+    </view>
+    <view class='share-cancel'>
+    <image src='https://pintuan.guangxing.club/wximg/share_cancel.png' bindtap='hideShare'></image>
+    </view>
+  </view>
 </view>
