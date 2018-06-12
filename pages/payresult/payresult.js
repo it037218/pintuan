@@ -135,5 +135,20 @@ Page({
 
       }
     })
+  },
+  getGeoupDetail:function(){
+    var utm = this.data.utm;
+    var group_id = this.data.group_id;
+    var com_id = this.data.com_id
+    if(utm == 'self'){
+        wx.redirectTo({
+          url: '/pages/inviteDetail/index?group_id'+group_id+'&com_id='+com_id,
+        })
+    }else{
+      wx.redirectTo({
+        url: '/pages/invitedDetail/index?group_id' + group_id + '&com_id=' + com_id,
+      })
+    }
+
   }
 })

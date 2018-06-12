@@ -21,7 +21,8 @@ Page({
     'name': '',
     'mobile': '',
     'wx_id': '',
-    'address_id':''
+    'address_id':'',
+    'group_id':''
   },
 
   /**
@@ -37,7 +38,9 @@ Page({
       this.setData({'utm':options.utm})
     }
     if('group_id' in options){
-
+      this.setData({
+        'group_id': options.group_id
+      })
     }
 
     // this.getProductDetail(options.com_id);
