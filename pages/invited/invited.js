@@ -18,13 +18,17 @@ Page({
     userStatus: userInfo.status,
     commodity_id: '',
     userOrderStatus: '',
-    utm: 'self'
+    utm: 'self',
+    group_id:'',
+    group_member_id:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log("invited.js")
+    console.log(options)
     if ('com_id' in options) {
       this.getProductDetail(options.com_id)
     } else {
@@ -33,7 +37,9 @@ Page({
     if ('utm' in options) {
       this.setData({ 'utm': options.utm })
     }
-
+    if('group_id' in options){
+      this.setData({'group_id':options.group_id})
+    }
     // this.getProductDetail(options.com_id);
     // this.setData({ commodity_id: options.com_id });
   },
@@ -89,12 +95,13 @@ Page({
   getProductDetail: function (id) {
     var that = this;
     wx.request({
-      url: url + '/wx/getProductInfo',
+      url: url + '/wx/getOrderCommodity',
       data: {
         com_id: id,
       },
       success: function (rst) {
         var content = rst.data
+        console.log('detail')
         console.log(content)
         that.setData({ 'commodity_id': content.id })
         // that.checkUserGroup(content.id)
@@ -120,13 +127,14 @@ Page({
       data: {
         'commodity_id': that.data.commodity_id,
         'openid': openid,
-        'utm': 'self'
+        'utm': 'other',
+        'group_id':that.data.group_id
       },
       success: function (rst) {
         var content = rst.data;
         console.log(content);
         wx.navigateTo({
-          url: '/pages/inviteDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo,
+          url: '/pages/inviteDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo+'&group_id='+that.data.group_id+'&group_member_id='+content.groupMemberId,
         })
       }
     })

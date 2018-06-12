@@ -2,7 +2,7 @@
 <view>
   <view class='groupNum'>
     <view>
-      <view>5人团</view>
+      <view>{{commodityInfo.full_number}}人团</view>
     </view>
   </view>
   <view class='detail1'>
@@ -10,7 +10,7 @@
       <view class='product_img'>
         <image src='{{commodityInfo.images}}'></image>
       </view>
-      <view style='padding:0 15rpx;box-sizing:border-box'>
+      <view style='width:360rpx;box-sizing:border-box'>
         <view class='title'>{{commodityInfo.name}}</view>
         <view class='desc'>{{commodityInfo.description}}</view>
         <view class='price'>
@@ -37,26 +37,19 @@
       </view>
     </view>
     <view class='member_content'>
-      <view>
-        <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-        <text class='shenfen'>团长</text>
-      </view>
-        <view>
-          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
+      <block wx:for="{{memberList}}">
+        <view wx:if="{{index==0}}">
+          <image src='{{item.avatar_url}}'></image>
+          <text class='shenfen'>团长</text>
+        </view>
+        <view wx:elif="{{index>0 && item.openid}}" bindtap='getUserInfo' data-openid="{{item.openid}}">
+          <image src='{{item.avatar_url}}'></image>
           <text class='shenfen'>联系TA</text>
         </view>
-        <view>
+        <view wx:else>
           <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-          <!-- <text class='shenfen'>联系TA</text> -->
         </view>
-        <view>
-          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-          <!-- <text class='shenfen'>联系TA</text> -->
-        </view>
-        <view>
-          <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
-          <!-- <text class='shenfen'>联系TA</text> -->
-        </view>
+      </block>
     </view>
     <text class='groupNum1'>已开团数  {{commodityInfo.tuan_number}} </text>
     <view class='show-rules'>
@@ -65,12 +58,13 @@
         <text class='icon '></text>
       </view>
       <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
-        游戏规则 游戏规则游戏规则游戏规则游戏规则 游戏规则 游戏规则 游戏规则 游戏规则
+      <rich-text nodes="{{commodityInfo.rule}}" bindtap="tap"></rich-text>
       </view>
     </view>
     <view class='show-details'>
-      <view>
-        商品详情
+     <view>
+        <rich-text nodes="{{commodityInfo.detail}}" bindtap="tap">
+        </rich-text>
       </view>
     </view>
   </view>

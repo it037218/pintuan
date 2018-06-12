@@ -1,34 +1,34 @@
 <view class='cover_img'>
-  <swiper indicator-dots=""
-  autoplay="true" interval="1000" duration="">
-  <block wx:for="{{productInfo.adImages}}">
-    <swiper-item>
-      <image src="https://pintuan.guangxing.club{{item}}" class="slide-image"/>
-    </swiper-item>
-  </block>
-</swiper>
+  <swiper indicator-dots="" autoplay="true" interval="1000" duration="">
+    <block wx:for="{{productInfo.adImages}}">
+      <swiper-item>
+        <image src="https://pintuan.guangxing.club{{item.path}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
 </view>
 <view>
   <view class='title'>
-    <view class='special-text'>5人团</view>
+    <view class='special-text'>{{productInfo.full_number}}人团</view>
     <view>{{productInfo.name}}</view>
   </view>
   <view class='desc'>
     {{productInfo.description}}
   </view>
   <view class='price-content'>
-      <text>￥{{productInfo.tuan_price}}</text>
-      <text style='margin-left:20rpx;'>拼团价</text>
-      <text>￥{{productInfo.market_price}}</text>
+    <text>￥{{productInfo.tuan_price}}</text>
+    <text style='margin-left:20rpx;'>拼团价</text>
+    <text>￥{{productInfo.market_price}}</text>
     <text>已开团 {{productInfo.tuan_number}}</text>
-    </view>
+  </view>
   <view class='show-rules'>
     <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
       拼团玩法
       <text class='icon '></text>
     </view>
     <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
-      游戏规则 游戏规则游戏规则游戏规则游戏规则 游戏规则 游戏规则 游戏规则 游戏规则
+      <rich-text nodes="{{productInfo.rule}}" bindtap="tap"></rich-text>
+
     </view>
   </view>
 
@@ -36,34 +36,35 @@
     <view>
       商品详情
     </view>
-  </view>
+    <rich-text nodes="{{productInfo.detail}}" bindtap="tap"></rich-text>
 
+  </view>
 </view>
 
-  <!--一键开团-->
-  <view class='option-content'>
-    <view class='status0' wx:if="{{productStatus == 0}}">
-      <view wx:if="{{userStatus==0}}">
-        <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;'>￥299 一键开团</button>
-      </view>
-      <view wx:if="{{userStatus==1}}" bindtap='payForOrder'>￥299 一键开团</view>
+<!--一键开团-->
+<view class='option-content'>
+  <view class='status0' wx:if="{{productStatus == 0}}">
+    <view wx:if="{{userStatus==0}}">
+      <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;'>￥{{productInfo.tuan_price}} 一键开团</button>
     </view>
+    <view wx:if="{{userStatus==1}}" bindtap='createOrder'>￥{{productInfo.tuan_price}} 一键开团</view>
+  </view>
 
-    <!--支付未完成-->
-    <view class='status1' wx:if="{{productStatus == 1}}">
-      <view style='display:inline-block'>支付未完成 继续开团</view>
-      <view class='count-down'>
-        <text class='clock'></text>
-        <text>28:26</text>
-      </view>
+  <!--支付未完成-->
+  <view class='status1' wx:if="{{productStatus == 1}}">
+    <view style='display:inline-block'>支付未完成 继续开团</view>
+    <!-- <view class='count-down'>
+      <text class='clock'></text>
+      <text>28:26</text>
+    </view> -->
+  </view>
+  <!--待支付-->
+  <view class='status2' wx:if="{{productInfo.status == 2}}">
+    <view>
+      取消
     </view>
-    <!--待支付-->
-    <view class='status2' wx:if="{{productInfo.status == 2}}">
-      <view>
-        取消
-      </view>
-      <view>
-        去支付
-      </view>
+    <view>
+      去支付
     </view>
   </view>
+</view>

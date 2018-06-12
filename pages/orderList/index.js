@@ -29,7 +29,6 @@ Page({
         this.setData({ activeIndex: 1 })
       }
     }
-    this.getUserDetail()
     var that = this;
     this.getUserGroupList();
     wx.getSystemInfo({
@@ -91,26 +90,7 @@ Page({
   onShareAppMessage: function () {
 
   },
-  getUserDetail: function () {
-    var that = this;
-    wx.request({
-      url: url + '/wx/getUserInfo',
-      success: function (rst) {
-        var content = rst.data;
-        var info = {};
 
-        // console.log(content.phone)
-        info.tel = content.phone
-        info.wx_id = content.wx_id
-        info.address = content.address
-        info.nickname = content.nickname
-        info.avatar = 'http://img5.imgtn.bdimg.com/it/u=1622118294,3955397871&fm=27&gp=0.jpg'
-        console.log(info)
-        that.setData({ userInfo:info})
-
-      }
-    })
-  },
   tabClick: function (e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
@@ -133,21 +113,21 @@ Page({
 
   },
   getSelfGroup:function(e){
-    console.log(e)
-    var com_id = e.currentTarget.dataset.comid
-    var orderNo = e.currentTarget.dataset.orderno
-
+    var com_id = e.currentTarget.dataset.comid;
+    var orderNo = e.currentTarget.dataset.orderno;
+    var group_id = e.currentTarget.dataset.groupid;
     wx.redirectTo({
-      url: '/pages/inviteDetail/index?com_id='+com_id+'&orderNo='+orderNo,
+      url: '/pages/inviteDetail/index?com_id='+com_id+'&orderNo='+orderNo+"&group_id="+group_id,
     })
   },
   getOtherGroup: function (e) {
     console.log(e)
     var com_id = e.currentTarget.dataset.comid
     var orderNo = e.currentTarget.dataset.orderno
+    var group_id = e.currentTarget.dataset.groupid;
 
     wx.redirectTo({
-      url: '/pages/invitedDetail/index?com_id=' + com_id + '&orderNo=' + orderNo,
+      url: '/pages/invitedDetail/index?com_id=' + com_id + '&orderNo=' + orderNo+"&group_id="+group_id,
     })
   }
 })

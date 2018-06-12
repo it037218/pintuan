@@ -17,7 +17,7 @@
         </button>
       </view>
       <view class='shape-3'>
-        <button>拼团详情</button>
+        <button bindtap=''>拼团详情</button>
 
       </view>
     </view>
@@ -25,17 +25,23 @@
 
   <view class='share-content' wx:if="{{showShare}}">
     <view class='share-option'>
-      <view class='s-1'  >
+      <view class='s-1'>
         <button class='s-1-1' open-type='share'></button>
         <view>微信好友</view>
       </view>
       <view class='s-2' bindtap='shareToTimeLine'>
-       <image src='https://pintuan.guangxing.club/wximg/pengyouquan.png?v=1'></image>
+        <image src='https://pintuan.guangxing.club/wximg/pengyouquan.png?v=1'></image>
         <view>分享生成图片</view>
       </view>
     </view>
     <view class='share-cancel'>
-    <image src='https://pintuan.guangxing.club/wximg/share_cancel.png' bindtap='hideShare'></image>
+      <image src='https://pintuan.guangxing.club/wximg/share_cancel.png' bindtap='hideShare'></image>
     </view>
+  </view>
+  <view>
+    <view class='share-content' wx:if="{{showSharePoster}}">
+
+<canvas style="width: 660rpx; height: 900rpx;background-color:#fff;positon:absolute;top:127rpx;left:45rpx;border-radius:10rpx;" canvas-id="firstCanvas"></canvas>
+</view>
   </view>
 </view>

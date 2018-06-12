@@ -1,4 +1,4 @@
-var url = getApp().globalData.Url////dd;/
+var url = getApp().globalData.Url ////dd;/
 var userInfo = wx.getStorageSync('userInfo')
 var openid = wx.getStorageSync('openid')
 var domainUrl = getApp().globalData.domainUrl;
@@ -11,7 +11,7 @@ Page({
   data: {
     'showRuleState': false,
     'showRuleContent': false,
-    'orderStatus': 2001,
+    'orderStatus': 2000,
     'commodityInfo': {},
     'orderNo': '',
     'userInfo': {},
@@ -23,25 +23,43 @@ Page({
       'id': ''
     },
     'memberList': [],
-    'com_id': ''
+    'com_id': '',
+    'groupNumber': 0,
+    'memberNumber': 0,
+    'showShare': false,
+    'shareImgUrl': '',
+    'group_id':'',
+    'group_member_id':'',
+    'name': '',
+    'mobile': '',
+    'wx_id': '',
+    'address_id': '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if ('invite' in options && options.invite == 'true') {
-      console.log(1111)
+    console.log('invtedDetail')
+    console.log(options)
+    this.getCommodityInfo(options.com_id)
+    this.setData({
+      'com_id': options.com_id
+    })
+    if('order_no' in options){
       this.setData({ 'order_no': options.order_no })
       this.getOrderInfo(options.orderNo)
-      this.setData({ 'com_id': options.com_id })
-      this.getUserInfo()
-      this.getGroupMember(options.group_id)
-      this.getCommodityInfo(options.com_id)
-    } else {
-      this.setData({'orderStatus':2000})
-      this.getCommodityInfo(options.com_id)
     }
+    this.getUserInfo()
+    if ('group_id' in options) {
+      this.setData({ 'group_id': options.group_id })
+      this.getGroupMember(options.group_id)
+    
+    }
+    if('group_member_id' in options){
+      this.setData({ 'group_id': options.group_id, 'group_member_id': options.group_member_id })
+    }
+    this.getAllGroupNumber(options.com_id)
   },
 
   /**
@@ -90,25 +108,57 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function (res) {
+    console.log(res)
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    var shareImgUrl = this.data.shareImgUrl + "?v=3"
+    var that = this;
+    return {
+      title: '一起开团吧',
+      path: 'pages/invitedDetail/index?com_id=' + that.data.com_id+'&group_id='+that.data.group_id,
+      imageUrl: shareImgUrl
+    }
+  },
+  shareToFriend: function () {
+    this.setData({ 'showShare': true })
+  },
+  hideShare: function () {
+    this.setData({ 'showShare': false })
+  },
+  shareToApp: function () {
+    wx.showShareMenu({
+      withShareTicket: true
+    })
+  },
+  shareToTimeLine: function () {
 
   },
   onChangeShowState: function () {
     var state = this.data.showRuleState;
-    this.setData({ 'showRuleState': !state, 'showRuleContent': !state })
+    this.setData({
+      'showRuleState': !state,
+      'showRuleContent': !state
+    })
   },
   getCommodityInfo: function (com_id) {
     var that = this;
     wx.request({
-      url: url + '/wx/getProductInfo',
+      url: url + '/wx/getOrderCommodity',
       data: {
         com_id: com_id
       },
       success: function (rst) {
+        console.log('commodityInfo')
         console.log(rst.data)
         var content = rst.data;
-        content.images = domainUrl + content.images;
-        that.setData({ 'commodityInfo': rst.data })
+        content.images = domainUrl + content.path;
+        that.setData({ 'shareImgUrl': content.images })
+        that.setData({
+          'commodityInfo': rst.data
+        })
       }
     })
   },
@@ -124,9 +174,25 @@ Page({
         if (content.success == 1) {
           var userInfo = content.data.userInfo;
           var address = content.data.address;
-          that.setData({ userInfo: userInfo })
-          if (address) {
-            that.setData({ address: address })
+          that.setData({
+            userInfo: userInfo
+          })
+          if (userInfo) {
+            that.setData({
+              name: userInfo.name,
+              mobile: userInfo.mobile,
+              wx_id: userInfo.wx_id
+
+            })
+          }
+          console.log('address')
+          console.log(address)
+          if (address.id) {
+            console.log(11111111111)
+            that.setData({
+              address: address,
+              address_id: address.id
+            })
           }
 
         }
@@ -156,8 +222,9 @@ Page({
 
         if (content.data != null) {
           var orderStatus = content.data.pay_status
-          console.log(orderStatus)
-          that.setData({ 'orderStatus': orderStatus })
+          that.setData({
+            'orderStatus': orderStatus
+          })
         }
       }
     })
@@ -207,7 +274,9 @@ Page({
       url: url + '/wx/payForOrder',
       data: {
         order_no: that.data.orderNo,
-        openid: openid
+        openid: openid,
+        com_id: that.data.com_id,
+        utm: 'other'
       },
       success: function (rst) {
         console.log(rst.data);
@@ -220,14 +289,17 @@ Page({
           signType: data.signType,
           paySign: data.paySign,
           success: function (res) {
-            that.setData({ 'orderStatus': 2003 })
+            that.setData({
+              'orderStatus': 2003
+            })
             wx.redirectTo({
-              url: '/pages/payresult/payresult?order_no=' + that.data.orderNo + '&com_id=' + that.data.com_id,
+              url: '/pages/payresult/payresult?order_no=' + that.data.orderNo + '&com_id=' + that.data.com_id + '&utm=other&group_id=' + that.data.group_id,
             })
           },
           fail: function (res) {
-            that.setData({ 'orderStatus': '2002' })
-
+            that.setData({
+              'orderStatus': '2002'
+            })
           }
         })
       }
@@ -241,15 +313,31 @@ Page({
         group_id: group_id
       },
       success: function (rst) {
-        that.setData({ 'memberList': rst.data })
+        console.log(rst.data)
+        that.setData({
+          'memberList': rst.data
+        })
       }
     })
   },
+  getAllGroupNumber: function (com_id) {
+    var that = this;
+    wx.request({
+      url: url + '/wx/getGroupNumber',
+      data: {
+        com_id: com_id
+      },
+      success: function (rst) {
+        that.setData({ 'groupNumber': rst.data.number, 'memberNumber': rst.data.groupMemberNum })
+      }
+    })
 
+  },
   joinIn: function () {
     console.log(1111)
+    var that = this;
     wx.redirectTo({
-      url: '/pages/invited/invited',
+      url: '/pages/invited/invited?com_id='+that.data.com_id+'&group_id='+that.data.group_id,
     })
   }
 })

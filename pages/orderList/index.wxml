@@ -16,7 +16,7 @@
             <view class='commodity_item' data-orderNo="{{group.order_no}}" data-comId='{{group.com_id}}'    data-groupid='{{group.id}}' bindtap='getSelfGroup'>
               <view class='groupNum'>
                 <view>
-                  <view>5人团</view>
+                  <view>{{group.full_number}}人团</view>
                 </view>
               </view>
 
@@ -29,11 +29,10 @@
                 <view class='commodity_content'>
                   <view class='name'>{{group.name}}</view>
                   <view class='group_number'>参团人数：{{group.valide_member_number}}人</view>
-
                   <view class='desc'>开团日期：{{group.created_at}}</view>
                   <view class='other'>
                     <view>
-                      <text>￥299</text>
+                      <text>￥{{group.price}}</text>
                       <text>拼团价</text>
                     </view>
                     <view>查看详情></view>
@@ -55,7 +54,7 @@
             <view class='commodity_item'>
               <view class='groupNum'>
                 <view>
-                  <view>5人团</view>
+                  <view>{{group.full_number}}人团</view>
                 </view>
               </view>
 
@@ -66,13 +65,12 @@
                   </image>
                 </view>
                 <view class='commodity_content'>
-                  <view class='name'>这里是商品名称以及瞩目的标题</view>
-                  <view class='group_number'>"参团人数：3人"</view>
-
-                  <view class='desc'>"开团日期：2018-05-21"</view>
+                  <view class='name'>{{group.name}}</view>
+                  <view class='group_number'>参团人数：{{group.valide_member_number}}人</view>
+                  <view class='desc'>开团日期：{{group.created_at}}</view>
                   <view class='other'>
                     <view>
-                      <text>￥299</text>
+                      <text>￥{{group.price}}</text>
                       <text>拼团价</text>
                     </view>
                     <view>查看详情></view>

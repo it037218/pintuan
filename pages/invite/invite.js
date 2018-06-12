@@ -2,7 +2,6 @@
 var url = getApp().globalData.Url;
 var domainUrl = getApp().globalData.domainUrl;
 var userInfo = wx.getStorageSync('userInfo')
-console.log(userInfo)
 var openid = wx.getStorageSync('openid')
 
 Page({
@@ -18,7 +17,11 @@ Page({
     userStatus: userInfo.status,
     commodity_id: '',
     userOrderStatus:'',
-    utm:'self'
+    utm:'self',
+    'name': '',
+    'mobile': '',
+    'wx_id': '',
+    'address_id':''
   },
 
   /**
@@ -32,6 +35,9 @@ Page({
     }
     if('utm' in options){
       this.setData({'utm':options.utm})
+    }
+    if('group_id' in options){
+
     }
 
     // this.getProductDetail(options.com_id);
@@ -89,7 +95,7 @@ Page({
   getProductDetail: function (id) {
     var that = this;
     wx.request({
-      url: url + '/wx/getProductInfo',
+      url: url + '/wx/getOrderCommodity',
       data: {
         com_id: id,
       },
@@ -98,8 +104,7 @@ Page({
         console.log(content)
         that.setData({'commodity_id':content.id})
         that.checkUserGroup(content.id)
-
-        content.images = domainUrl + content.images
+        content.images = domainUrl + content.path
         that.setData({ productInfo: content })
       }
     })
@@ -111,9 +116,8 @@ Page({
 
   },
   bindGetUserInfo: function (e) {
-    console.log(e.detail.userInfo)
   },
-  payForOrder: function () {
+  createOrder: function () {
     var that = this;
     wx.request({
       url: url + '/wx/createOrder',
@@ -124,9 +128,9 @@ Page({
       },
       success: function (rst) {
         var content = rst.data;
-        console.log(content);
+        console.log(content)
         wx.navigateTo({
-          url: '/pages/inviteDetail/index?com_id='+that.data.commodity_id+'&status=1&orderNo=' + content.orderNo,
+          url: '/pages/inviteDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo + "&group_id=" + content.groupId,
         })
       }
     })
@@ -154,17 +158,11 @@ Page({
       success:function(rst){
         var self = rst.data.self.length;
         var other = rst.data.other.length;
-        console.log(self)
-        console.log(other)
-
         if(self && !other){
-          console.log('self')
           wx.redirectTo({
             url: '/pages/orderList/index?utm=self',
           })
         }else if(!self && other){
-          console.log('other')
-
           wx.redirectTo({
             url: '/pages/orderList/index?utm=other',
           })
@@ -173,7 +171,4 @@ Page({
       }
     })
   }
-
-
-
 })

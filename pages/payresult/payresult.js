@@ -14,18 +14,27 @@ Page({
     'com_id':'',
     'utm':'',
     'showShare':false,
-    'shareImgUrl':''
+    'shareImgUrl':'',
+    'shareQrcodeImage':'',
+    'group_id':'',
+    'productInfo':{},
+    'showSharePoster':false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log('payment')
+    console.log(options)
     var order_no = options.order_no;
     var com_id = options.com_id;
     var utm = options.utm;
     this.setData({'orderNo':order_no,'com_id':com_id,'utm':utm})
     this.getCommodityInfo(com_id)
+    if('group_id' in options){
+      this.setData({'group_id':options.group_id})
+    }
   },
 
   /**
@@ -83,7 +92,7 @@ Page({
     var that = this;
     return {
       title: '一起开团吧',
-      path: 'pages/invitedDetail/index?com_id='+that.data.com_id,
+      path: 'pages/invitedDetail/index?com_id='+that.data.com_id+'&group_id='+that.data.group_id,
       imageUrl: shareImgUrl
     }
   },
@@ -99,7 +108,19 @@ Page({
     })
   },
   shareToTimeLine:function(){
+    var that = this;
+    this.setData({'showSharePoster':true})
+    wx.request({
+      url: url +'/wx/createShareImage',
+      data:{
+        group_id:that.data.group_id
+      },
+      success:function(rst){
+        var qrcode = domainUrl+rst.data
+        var productInfo = that.data.productInfo
 
+      }
+    })
   },
   getCommodityInfo:function(com_id){
     var that = this;
@@ -110,6 +131,8 @@ Page({
       },
       success:function(rst){
         that.setData({'shareImgUrl': domainUrl +'/' +rst.data.images})
+        that.setData({ 'productInfo': rst.data})
+
       }
     })
   }

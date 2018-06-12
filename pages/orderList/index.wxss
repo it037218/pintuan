@@ -170,14 +170,14 @@ page {
   justify-content: space-between;
 }
 .commodity_content .other view:first-child{
-  width: 210rpx;
+  width: 250rpx;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
+  text-align: left
 }
 .commodity_content .other view:first-child text:first-child{
   font-size: 48rpx;
   color: #f43530;
-  text-align:left
 }
 .commodity_content .other view:first-child text:last-child{
   font-size: 24rpx;

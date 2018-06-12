@@ -84,3 +84,7 @@ swiper image {
 }
 
 /*订单状态*/
+rich-text img{
+  width: 100%;
+
+}

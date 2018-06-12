@@ -74,7 +74,7 @@ Page({
         openid:openid
       },
       success: function (rst) {
-        var content = rst.data;
+        var content = rst.data.data;
         var info = {};
 
         console.log(content.phone)
@@ -82,10 +82,8 @@ Page({
         info.wx_id = content.wx_id
         info.address = content.address
         info.nickname = content.nickname
-        info.avatar = 'http://img5.imgtn.bdimg.com/it/u=1622118294,3955397871&fm=27&gp=0.jpg'
-        console.log(info)
+        info.avatar = content.avatar
         that.setData({ userInfo:info})
-
       }
     })
 
