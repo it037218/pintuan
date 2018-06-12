@@ -41,7 +41,7 @@
   <view>
     <view class='share-content' wx:if="{{showSharePoster}}">
 
-<canvas style="width: 660rpx; height: 900rpx;background-color:#fff;positon:absolute;top:127rpx;left:45rpx;border-radius:10rpx;" canvas-id="firstCanvas"></canvas>
+<canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;background-color:#fff;positon:absolute;top:127rpx;left:45rpx;border-radius:10rpx;" canvas-id="firstCanvas"></canvas>
 </view>
   </view>
 </view>

@@ -339,5 +339,9 @@ Page({
     wx.redirectTo({
       url: '/pages/invited/invited?com_id='+that.data.com_id+'&group_id='+that.data.group_id,
     })
+  },
+  formSubmit: function (e) {
+    var app = getApp();
+    app.submitFormId(e.detail.formId);
   }
 })

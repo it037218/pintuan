@@ -4,16 +4,22 @@
       <view class="weui-navbar">
         <block wx:for="{{tabs}}" wx:key="*this">
           <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-            <view class="weui-navbar__title">{{item}}</view>
+            <form bindsubmit='formSubmit' report-submit='true'>
+ <button bindtap='getGeoupDetail' form-type='submit' plain='true' style='border:none;line-height:100%'>
+              <view class="weui-navbar__title">
+               {{item}}
+              </view>
+              </button>
+            </form>
           </view>
         </block>
         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
       </view>
       <view class="weui-tab__panel">
-      <!--我的开团-->
+        <!--我的开团-->
         <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
           <view wx:for="{{selfGroup}}" wx:for-item="group">
-            <view class='commodity_item' data-orderNo="{{group.order_no}}" data-comId='{{group.com_id}}'    data-groupid='{{group.id}}' bindtap='getSelfGroup'>
+            <view class='commodity_item' data-orderNo="{{group.order_no}}" data-comId='{{group.com_id}}' data-groupid='{{group.id}}' bindtap='getSelfGroup'>
               <view class='groupNum'>
                 <view>
                   <view>{{group.full_number}}人团</view>

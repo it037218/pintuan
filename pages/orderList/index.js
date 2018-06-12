@@ -129,5 +129,9 @@ Page({
     wx.redirectTo({
       url: '/pages/invitedDetail/index?com_id=' + com_id + '&orderNo=' + orderNo+"&group_id="+group_id,
     })
+  },
+  formSubmit: function (e) {
+    var app = getApp();
+    app.submitFormId(e.detail.formId);
   }
 })

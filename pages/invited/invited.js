@@ -180,8 +180,9 @@ Page({
 
       }
     })
+  },
+  formSubmit: function (e) {
+    var app = getApp();
+    app.submitFormId(e.detail.formId);
   }
-
-
-
 })

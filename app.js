@@ -69,5 +69,19 @@ App({
     Url:'https://pintuan.guangxing.club/pintuan/guangxing',
     domainUrl:'https://pintuan.guangxing.club',
     openid:wx.getStorageSync('openid')
-  }
+  },
+  submitFormId: function (formId) {
+    console.log('formId')
+    console.log(formId)
+    wx.request({
+      url: this.globalData.Url +'/wx/saveFormId',
+      data: {
+        openid: this.globalData.openid,
+        formId: formId
+      },
+      success: function (ret) {
+
+      }
+    })
+  },
 })
