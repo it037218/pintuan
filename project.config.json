@@ -69,7 +69,7 @@
 					"id": 5,
 					"name": "开团-02-拼团中",
 					"pathName": "pages/inviteDetail/index",
-					"query": "com_id=4&orderNo=2018060702172615283090462&group_id=1"
+					"query": "com_id=4"
 				},
 				{
 					"id": -1,

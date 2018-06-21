@@ -42,10 +42,10 @@ Page({
     'showShare': false,
     'shareImgUrl': '',
     'group_id': '',
-    'countSecond':0,
-    'countMin':0,
-    'countHour':0,
-    'countDay':0
+    'countSecond':10,
+    'countMin':10,
+    'countHour':10,
+    'countDay':20
   },
 
   /**

@@ -30,10 +30,19 @@
                 <text class='status-desc' wx:if="{{orderStatus == 2005}}">已结束  拼团成功</text>
                 <text class='status-desc' wx:if="{{orderStatus == 2004}}">拼团失败</text>
 
-                <!-- <view class='left-time'>
-          <view>支付剩余时间</view>
-          <view>28:20</view>
-        </view> -->
+                <view class='left-time' wx:if="{{orderStatus==2003}}">
+                    <view style='margin-right:10rpx;'>距离结束还剩</view>
+                    <view class='countDown'>
+                        <view class='time'>{{countDay}}</view>
+                         <view class='word'>天</view>
+                        <view class='time'>{{countHour}}</view>
+                        <view class='word'>时</view>
+                        <view class='time'>{{countMin}}</view>
+                        <view class='day'>分</view>
+                        <view class='time'>{{countSecond}}</view>
+
+                    </view>
+                </view>
             </view>
         </view>
         <view class='member_content' wx:if="{{orderStatus !=2002}}">
@@ -59,7 +68,7 @@
                 </view>
             </block>
         </view>
-        <text class='groupNum1'  wx:if="{{orderStatus !=2002}}">已开团数  {{groupNumber}} </text>
+        <text class='groupNum1' wx:if="{{orderStatus !=2002}}">已开团数  {{groupNumber}} </text>
         <view class='show-rules' wx:if="{{orderStatus !=2002}}">
             <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
                 拼团玩法
