@@ -1,6 +1,6 @@
 <view class='cover_img'>
   <swiper indicator-dots=""
-  autoplay="true" interval="1000" duration="">
+  autoplay="true" interval="5000" duration="">
   <block wx:for="{{productInfo.adImages}}">
     <swiper-item>
       <image src="https://pintuan.guangxing.club{{item.path}}" class="slide-image"/>

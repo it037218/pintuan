@@ -44,6 +44,8 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    console.log('saveAddress')
+    console.log(options)
     var address_id = options.address_id;
     this.setData({'address_id':address_id})
     if(address_id){
@@ -112,7 +114,6 @@ Page({
   },
   formSubmit: function (e) {
     var content = e.detail.value;
-    console.log(content)
     var that = this;
     if (!content.street) {
       wx.showModal({
@@ -183,17 +184,15 @@ Page({
         address_id:address_id
       },
       success:function(rst){
-        console.log(rst)
         if(rst.data.success == 1){
           var content = rst.data.content;
-          console.log(content)
           that.setData({ 'prince': content.prince, 'city': content.city, 'defaultSet': content.default, 'district': content.district, 'street': content.street, 'address': content.prince + content.city + content.district + content.street})
         }
       }
     })
   },
-  formSubmit: function (e) {
-    var app = getApp();
-    app.submitFormId(e.detail.formId);
-  }
+  // formSubmit: function (e) {
+  //   var app = getApp();
+  //   app.submitFormId(e.detail.formId);
+  // }
 })

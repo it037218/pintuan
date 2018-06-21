@@ -39,6 +39,8 @@ Page({
     }
     if('group_id' in options){
       this.setData({'group_id':options.group_id})
+      this.getOrderInfoByGroupId(options.group_id)
+
     }
     // this.getProductDetail(options.com_id);
     // this.setData({ commodity_id: options.com_id });
@@ -134,7 +136,7 @@ Page({
         var content = rst.data;
         console.log(content);
         wx.navigateTo({
-          url: '/pages/inviteDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo+'&group_id='+that.data.group_id+'&group_member_id='+content.groupMemberId,
+          url: '/pages/invitedDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo+'&group_id='+that.data.group_id+'&group_member_id='+content.groupMemberId,
         })
       }
     })
@@ -184,5 +186,28 @@ Page({
   formSubmit: function (e) {
     var app = getApp();
     app.submitFormId(e.detail.formId);
+  },
+  getOrderInfoByGroupId: function (group_id) {
+
+    var that = this;
+    wx.request({
+      url: url + '/wx/getOrderInfoByGroupId',
+      data: {
+        openid: openid,
+        group_id: group_id
+      },
+      success: function (rst) {
+        var content = rst.data
+        console.log('orderInfoByGroupId')
+        console.log(content)
+        if (content.data != null) {
+          var orderStatus = content.data.pay_status
+          that.setData({
+            'orderStatus': orderStatus
+          })
+        }
+      }
+    })
+
   }
 })

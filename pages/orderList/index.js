@@ -15,7 +15,8 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     selfGroup:[],
-    ohterGroup:[]
+    ohterGroup:[],
+    createGroup:false
   },
 
   /**
@@ -107,6 +108,10 @@ Page({
       success:function(rst){
         var data = rst.data;
         console.log(data)
+        if(data.self.length==0){
+          console.log('开团')
+          that.setData({createGroup:true})
+        }
         that.setData({'selfGroup':data.self,'otherGroup':data.other})
       }
     })
@@ -117,7 +122,7 @@ Page({
     var orderNo = e.currentTarget.dataset.orderno;
     var group_id = e.currentTarget.dataset.groupid;
     wx.redirectTo({
-      url: '/pages/inviteDetail/index?com_id='+com_id+'&orderNo='+orderNo+"&group_id="+group_id,
+      url: '/pages/inviteDetail/index?com_id='+com_id+'&order_no='+orderNo+"&group_id="+group_id,
     })
   },
   getOtherGroup: function (e) {
@@ -127,11 +132,16 @@ Page({
     var group_id = e.currentTarget.dataset.groupid;
 
     wx.redirectTo({
-      url: '/pages/invitedDetail/index?com_id=' + com_id + '&orderNo=' + orderNo+"&group_id="+group_id,
+      url: '/pages/invitedDetail/index?com_id=' + com_id + '&order_no=' + orderNo+"&group_id="+group_id,
     })
   },
   formSubmit: function (e) {
     var app = getApp();
     app.submitFormId(e.detail.formId);
+  },
+  createGroup:function(){
+    wx.redirectTo({
+      url: '/pages/invite/invite?op=create',
+    })
   }
 })

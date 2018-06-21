@@ -190,3 +190,8 @@ page {
     line-height: 90rpx;
 
 }
+button{
+  border:none!important;
+    line-height:100%!important;  
+   padding: 0!important
+}

@@ -1,5 +1,5 @@
 <view class='cover_img'>
-  <swiper indicator-dots="" autoplay="true" interval="1000" duration="">
+  <swiper indicator-dots="" autoplay="true" interval="5000" duration="">
     <block wx:for="{{productInfo.adImages}}">
       <swiper-item>
         <image src="https://pintuan.guangxing.club{{item.path}}" class="slide-image" />
@@ -7,7 +7,7 @@
     </block>
   </swiper>
 </view>
-<view>
+<view style='padding-bottom: 80rpx;'>
   <view class='title'>
     <view class='special-text'>{{productInfo.full_number}}人团</view>
     <view>{{productInfo.name}}</view>
@@ -21,15 +21,19 @@
     <text>￥{{productInfo.market_price}}</text>
     <text>已开团 {{productInfo.tuan_number}}</text>
   </view>
+
   <view class='show-rules'>
     <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
-      拼团玩法
+      <form bindsubmit='formSubmit' report-submit='true'>
+        <button bindtap='getGroupDetail' form-type='submit' plain='true' style='border:none;line-height:80rpx;display:inline-block;height:80rpx;padding-left:0;'>拼团玩法</button>
+      </form>
       <text class='icon '></text>
     </view>
-    <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
-      <rich-text nodes="{{productInfo.rule}}" bindtap="tap"></rich-text>
+  </view>
 
-    </view>
+  <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
+    <rich-text nodes="{{productInfo.rule}}" bindtap="tap"></rich-text>
+
   </view>
 
   <view class='show-details'>
@@ -43,9 +47,11 @@
 
 <!--一键开团-->
 <view class='option-content'>
+  <!-- <form bindsubmit='formSubmit' report-submit='true'>
+    <button form-type='submit' plain='true' style='border:none;line-height:88rpx;display:inline-block;height:88rpx;padding:0;margin-left:30rpx;'> -->
   <view class='status0' wx:if="{{productStatus == 0}}">
     <view wx:if="{{userStatus==0}}">
-      <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;'>￥{{productInfo.tuan_price}} 一键开团</button>
+      <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;' bindgetuserinfo="bindGetUserInfo">￥{{productInfo.tuan_price}} 一键开团</button>
     </view>
     <view wx:if="{{userStatus==1}}" bindtap='createOrder'>￥{{productInfo.tuan_price}} 一键开团</view>
   </view>
@@ -67,4 +73,6 @@
       去支付
     </view>
   </view>
+  <!-- </button>
+  </form> -->
 </view>

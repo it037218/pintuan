@@ -21,14 +21,14 @@
       </view>
     </view>
   </view>
-  <view wx:if="{{orderStatus==2002 || orderStatus==2003 || orderStatus == 2004 || orderStatus == 2005 || orderStatus==2000}}">
+  <view wx:if="{{orderSattus==2000||orderStatus==2002 || orderStatus==2003 || orderStatus == 2004 || orderStatus == 2005 || orderStatus==2000}}">
     <view class='order_content'>
       <!--待支付-->
       <view class='status0'>
-        <text class='status-desc' wx:if="{{orderStatus == 2002}}">待支付</text>
-        <text class='status-desc' wx:if="{{orderStatus == 2003}}">拼团中 已有两人拼团成功</text>
-        <text class='status-desc' wx:if="{{orderStatus == 2004}}">已结束  拼团成功</text>
-        <text class='status-desc' wx:if="{{orderStatus == 2005}}">拼团失败</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2002 || orderStatus==2001}}">待支付</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2003 || orderStatus==2000}}">拼团中 已有{{memberNumber}}人拼团成功</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2005}}">已结束  拼团成功</text>
+        <text class='status-desc' wx:if="{{orderStatus == 2004}}">拼团失败</text>
 
         <!-- <view class='left-time'>
           <view>支付剩余时间</view>
@@ -42,27 +42,27 @@
           <image src='{{item.avatar_url}}'></image>
           <text class='shenfen'>团长</text>
         </view>
-        <view wx:elif="{{index>0 && item.openid}}" bindtap='getUserInfo' data-openid="{{item.openid}}">
+        <view wx:elif="{{index>0 && item.openid}}">
           <image src='{{item.avatar_url}}'></image>
-          <text class='shenfen'>联系TA</text>
+          <!-- <text class='shenfen'>联系TA</text> -->
         </view>
         <view wx:else>
           <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
         </view>
       </block>
     </view>
-    <text class='groupNum1'>已开团数  {{commodityInfo.tuan_number}} </text>
+    <text class='groupNum1'>已开团数  {{groupNumber}} </text>
     <view class='show-rules'>
       <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
         拼团玩法
         <text class='icon '></text>
       </view>
       <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
-      <rich-text nodes="{{commodityInfo.rule}}" bindtap="tap"></rich-text>
+        <rich-text nodes="{{commodityInfo.rule}}" bindtap="tap"></rich-text>
       </view>
     </view>
     <view class='show-details'>
-     <view>
+      <view>
         <rich-text nodes="{{commodityInfo.detail}}" bindtap="tap">
         </rich-text>
       </view>
@@ -92,13 +92,13 @@
         </view>
 
         <view class='address' wx:if="{{address.id}}">
-          <view class='edit' bindtap='editAddress' data-id="{{address.id}}"></view>
-          <input placeholder='dddd ' value='{{address.prince}}  {{address.city}}  {{address.district}} {{address.street}}'></input>
+          <view class='edit'></view>
+          <input placeholder='请输入您的地址 ' value='{{address.prince}}  {{address.city}}  {{address.district}} {{address.street}}' bindfocus='editAddress' data-id="{{address.id}}"></input>
         </view>
 
-        <view class='address' wx:if="{{!address.id}}">
-          <view class='edit' bindtap='editAddress' data-id=""></view>
-          <input placeholder='请输入您的地址'></input>
+        <view class='address' wx:if="{{!address.id}}" >
+          <view class='edit' ></view>
+          <input placeholder='请输入您的地址' bindfocus='editAddress' data-id=""></input>
         </view>
       </view>
     </view>
@@ -108,31 +108,51 @@
 
   <!--待支付-->
   <view class='option-content'>
-    <view class='status2' wx:if="{{orderStatus==2002}}">
-      <view>
-        取消
-      </view>
-      <view bindtap='payment'>
-        去支付
-      </view>
+    <view class='status3' wx:if="{{orderStatus==2002}}">
+        <view>微信支付 ￥{{commodityInfo.tuan_price}}元</view>
+    </view>
+      <view class='status4' wx:if="{{orderStatus==2000}}" bindtap='joinIn'>
+      <view>参与拼团</view>
     </view>
     <!--微信支付-->
     <view class='status3' wx:if="{{orderStatus==2001}}" bindtap='payment'>
-      <view>微信支付 ￥299元</view>
+      <view>微信支付 ￥{{commodityInfo.tuan_price}}元</view>
     </view>
     <!--邀请好友拼团-->
-    <view class='status4' wx:if="{{orderStatus==2003}}">
-      <view>邀请好友拼团</view>
+    <view class='status4' wx:if="{{orderStatus==2003 && !joinInGroupStatus}}">
+      <view bindtap='shareToFriend'>邀请好友拼团</view>
     </view>
-    <view class='status4' wx:if="{{orderStatus==2000}}" bindtap='joinIn'>
-      <view>参与拼团</view>
+     <view class='status4' wx:if="{{orderStatus==2003 && joinInGroupStatus}}">
+      <view bindtap='createGroup'>我也要开团</view>
     </view>
+  
     <!--拼团成功-->
-    <view class='status5' wx:if="{{orderStatus==2005}}">
+    <!-- <view class='status5' wx:if="{{orderStatus==2005}}">
       <view>拼团已成功 去查看你的成员们吧</view>
-    </view>
-    <view class='status6' wx:if="{{orderStatus==2004}}">
+    </view> -->
+    <!-- <view class='status6' wx:if="{{orderStatus==2004}}">
       <view>一键重新开团</view>
+    </view> -->
+  </view>
+  <view>
+    <view class='share-content' wx:if="{{showShare}}">
+      <view class='share-option'>
+        <view class='s-1'>
+          <button class='s-1-1' open-type='share'></button>
+          <view>微信好友</view>
+        </view>
+        <view class='s-2' bindtap='shareToTimeLine'>
+          <image src='https://pintuan.guangxing.club/wximg/pengyouquan.png?v=1'></image>
+          <view>分享生成图片</view>
+        </view>
+      </view>
+      <view class='share-cancel'>
+        <image src='https://pintuan.guangxing.club/wximg/share_cancel.png' bindtap='hideShare'></image>
+      </view>
+    </view>
+    <view class='share-content' wx:if="{{showSharePoster}}" bindtap='closePoster'>
+
+      <canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;background-color:#fff;positon:absolute;top:127rpx;left:45rpx;border-radius:10rpx;" canvas-id="firstCanvas" bindlongtap='saveSharePoster'></canvas>
     </view>
   </view>
 </view>

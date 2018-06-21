@@ -32,23 +32,35 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     _self = this;
 
     console.log('payment')
     console.log(options)
-    var order_no = options.order_no;
+    if ('order_no' in options) {
+      var order_no = options.order_no;
+    } else {
+      var order_no = '';
+    }
     var com_id = options.com_id;
     var utm = options.utm;
-    this.setData({ 'orderNo': order_no, 'com_id': com_id, 'utm': utm })
+
+    this.setData({
+      'orderNo': order_no,
+      'com_id': com_id,
+      'utm': utm
+    })
     this.getCommodityInfo(com_id)
     if ('group_id' in options) {
-      this.setData({ 'group_id': options.group_id })
+      this.setData({
+        'group_id': options.group_id
+      })
     }
+
 
     //读取系统信息
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         var ratio = res.windowWidth / 750;
         _self.setData({
           ratio: ratio,
@@ -61,7 +73,7 @@ Page({
     //下载海报背景图
     wx.downloadFile({
       url: getApp().globalData.domainUrl + '/wximg/poster-bg.png',
-      success: function (ret) {
+      success: function(ret) {
         _self.setData({
           downloadCount: _self.data.downloadCount + 1,
           posterBgFilePath: ret.tempFilePath
@@ -75,49 +87,49 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function (res) {
+  onShareAppMessage: function(res) {
     console.log(res)
     if (res.from === 'button') {
       // 来自页面内转发按钮
@@ -131,21 +143,25 @@ Page({
       imageUrl: shareImgUrl
     }
   },
-  shareToFriend: function () {
-    this.setData({ 'showShare': true })
+  shareToFriend: function() {
+    this.setData({
+      'showShare': true
+    })
   },
-  hideShare: function () {
-    this.setData({ 'showShare': false })
+  hideShare: function() {
+    this.setData({
+      'showShare': false
+    })
   },
-  shareToApp: function () {
+  shareToApp: function() {
     wx.showShareMenu({
       withShareTicket: true
     })
   },
 
   //检查海报资源下载情况
-  checkDownloadCount: function () {
-    if (this.data.downloadCount == 3) {//背景图和二维码图
+  checkDownloadCount: function() {
+    if (this.data.downloadCount == 3) { //背景图和二维码图
       var ctx = wx.createCanvasContext('firstCanvas', this);
 
       //先画背景
@@ -161,7 +177,7 @@ Page({
       ctx.setFontSize(16);
       ctx.setTextBaseline('top');
       ctx.setTextAlign('right');
-      ctx.fillText(this.data.productInfo.name, 400 * this.data.ratio, 320 * this.data.ratio);
+      ctx.fillText(this.data.productInfo.name, 400 * this.data.ratio, 325 * this.data.ratio);
 
       //拼团价
       ctx.setFillStyle('red');
@@ -172,7 +188,7 @@ Page({
       ctx.setFontSize(16);
       ctx.setFillStyle('black');
       ctx.setTextAlign('left');
-      ctx.fillText(this.data.productInfo.tuan_price, 420 * this.data.ratio, 320 * this.data.ratio);
+      ctx.fillText(this.data.productInfo.tuan_price, 422 * this.data.ratio, 325 * this.data.ratio);
 
       //几人团
       ctx.setFillStyle('white');
@@ -181,19 +197,19 @@ Page({
 
       //市场价
       ctx.setFontSize(10);
-      ctx.setFillStyle = '#a0a0a0';
-      ctx.fillText('￥' + this.data.productInfo.market_price, 400 * this.data.ratio, 472 * this.data.ratio);
+      ctx.setFillStyle('#a0a0a0');
+      ctx.fillText('￥' + this.data.productInfo.market_price, 380 * this.data.ratio, 472 * this.data.ratio);
 
       ctx.draw();
     }
   },
 
   //开始画出海报图
-  startDrawPoster: function (qrcodeUrl, productInfo) {
+  startDrawPoster: function(qrcodeUrl, productInfo) {
     //下载二维码
     wx.downloadFile({
       url: qrcodeUrl,
-      success: function (ret) {
+      success: function(ret) {
         _self.setData({
           downloadCount: _self.data.downloadCount + 1,
           qrcodeFilePath: ret.tempFilePath
@@ -206,7 +222,7 @@ Page({
     //下载产品封面图
     wx.downloadFile({
       url: getApp().globalData.domainUrl + productInfo.path,
-      success: function (ret) {
+      success: function(ret) {
         _self.setData({
           downloadCount: _self.data.downloadCount + 1,
           coverFilePath: ret.tempFilePath
@@ -217,15 +233,17 @@ Page({
     })
   },
 
-  shareToTimeLine: function () {
+  shareToTimeLine: function() {
     var that = this;
-    this.setData({ 'showSharePoster': true })
+    this.setData({
+      'showSharePoster': true
+    })
     wx.request({
       url: url + '/wx/createShareImage',
       data: {
         group_id: that.data.group_id
       },
-      success: function (rst) {
+      success: function(rst) {
         var qrcode = domainUrl + rst.data
         var productInfo = that.data.productInfo
 
@@ -233,33 +251,64 @@ Page({
       }
     })
   },
-  getCommodityInfo: function (com_id) {
+  getCommodityInfo: function(com_id) {
     var that = this;
     wx.request({
       url: url + '/wx/getOrderCommodity',
       data: {
         'com_id': com_id
       },
-      success: function (rst) {
-        that.setData({ 'shareImgUrl': domainUrl + '/' + rst.data.path })
-        that.setData({ 'productInfo': rst.data })
+      success: function(rst) {
+        that.setData({
+          'shareImgUrl': domainUrl + '/' + rst.data.path
+        })
+        that.setData({
+          'productInfo': rst.data
+        })
 
       }
     })
   },
-  getGeoupDetail: function () {
+  getGeoupDetail: function() {
     var utm = this.data.utm;
     var group_id = this.data.group_id;
     var com_id = this.data.com_id
+    var order_no = this.data.orderNo
     if (utm == 'self') {
       wx.redirectTo({
-        url: '/pages/inviteDetail/index?group_id' + group_id + '&com_id=' + com_id,
+        url: '/pages/inviteDetail/index?group_id=' + group_id + '&com_id=' + com_id + '&order_no=' + order_no,
       })
     } else {
       wx.redirectTo({
-        url: '/pages/invitedDetail/index?group_id' + group_id + '&com_id=' + com_id,
+        url: '/pages/invitedDetail/index?group_id=' + group_id + '&com_id=' + com_id + '&order_no=' + order_no,
       })
     }
 
-  }
+  },
+  saveSharePoster: function (e) {
+    console.log('长按保存')
+
+    wx.canvasToTempFilePath({
+      canvasId: 'firstCanvas',
+      success: function (res) {
+        console.log('保存邀请海报')
+        console.log(res.tempFilePath);
+        wx.saveImageToPhotosAlbum({
+          filePath: res.tempFilePath,
+          success(res) {
+            wx.showToast({
+              title: '保存成功',
+            })
+          }
+        })
+      }
+    })
+  },
+  closePoster: function () {
+    this.setData({
+      'showSharePoster': false,
+      'downloadCount': 1
+    })
+
+  },
 })

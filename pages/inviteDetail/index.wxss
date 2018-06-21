@@ -128,8 +128,8 @@ page {
 }
 
 .member_content >view image {
-  width: 100%;
-  height: 100%;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
   overflow:  hidden;
 }
@@ -313,4 +313,9 @@ page {
   background-size: contain;
   background-color: transparent;
   border-radius: 50%;
+}
+button{
+  border:none!important;
+    line-height:100%!important;  
+   padding: 0!important
 }
