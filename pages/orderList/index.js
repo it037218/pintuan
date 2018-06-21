@@ -1,7 +1,7 @@
 // pages/user/user.js
 var url = getApp().globalData.Url;
 var sliderWidth =89; // 需要设置slider的宽度，用于计算中间位置
-var openid = wx.getStorageSync('openid')
+var openid =null;
 
 Page({
 
@@ -23,6 +23,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      openid = wx.getStorageSync('openid')
+
     if('utm' in options){
       if(options.utm == 'self'){
         this.setData({activeIndex: 0})

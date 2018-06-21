@@ -1,6 +1,6 @@
 var url = getApp().globalData.Url ////dd;/
 var userInfo = wx.getStorageSync('userInfo')
-var openid = wx.getStorageSync('openid')
+var openid =null;
 var domainUrl = getApp().globalData.domainUrl;
 var _self = null;
 
@@ -52,6 +52,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      openid = wx.getStorageSync('openid')
+
     _self = this;
     console.log('invteDetail')
     this.getCommodityInfo(options.com_id)

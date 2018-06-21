@@ -3,7 +3,7 @@ var url = getApp().globalData.Url;
 var domainUrl = getApp().globalData.domainUrl;
 var userInfo = wx.getStorageSync('userInfo')
 console.log(userInfo)
-var openid = wx.getStorageSync('openid')
+var openid = null
 
 Page({
 
@@ -15,7 +15,7 @@ Page({
     productInfo: {},
     productStatus: 0,
     loginStatus: false,
-    userStatus: userInfo.status,
+    userStatus: 0,
     commodity_id: '',
     userOrderStatus: '',
     utm: 'self',
@@ -27,8 +27,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log("invited.js")
-    console.log(options)
+      openid = wx.getStorageSync('openid')
     if ('com_id' in options) {
       this.getProductDetail(options.com_id)
     } else {
@@ -120,7 +119,26 @@ Page({
 
   },
   bindGetUserInfo: function (e) {
-    console.log(e.detail.userInfo)
+      var that = this;
+      wx.request({
+          url: 'https://pintuan.guangxing.club/pintuan/guangxing/wx/login_confirm',
+          data: {
+              avatarUrl: e.detail.userInfo.avatarUrl,
+              nickname: e.detail.userInfo.nickName,
+              openid: openid
+          },
+          success: function () {
+              that.setData({
+                  'userStatus': '1'
+              })
+              that.payForOrder();
+          }
+      })
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      if (this.userInfoReadyCallback) {
+          this.userInfoReadyCallback(res)
+      }
   },
   payForOrder: function () {
     var that = this;
@@ -208,6 +226,21 @@ Page({
         }
       }
     })
+  },
+  chckUserStatus: function (openid) {
+      var that = this;
+      wx.request({
+          url: url + '/wx/checkUserStatus',
+          data: {
+              openid: openid
+          },
+          success: function (rst) {
+              that.setData({
+                  'userStatus': rst.data.status
+              })
+          }
+
+      })
 
   }
 })

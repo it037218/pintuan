@@ -1,7 +1,7 @@
 // pages/payresult/payresult.js
 // pages/user/user.js
 var url = getApp().globalData.Url;
-var openid = wx.getStorageSync('openid')
+var openid = null;
 var domainUrl = getApp().globalData.domainUrl;
 var _self = null;
 
@@ -33,10 +33,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+      openid = wx.getStorageSync('openid')
+
     _self = this;
 
-    console.log('payment')
-    console.log(options)
     if ('order_no' in options) {
       var order_no = options.order_no;
     } else {

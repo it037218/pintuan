@@ -2,7 +2,7 @@
 var tcity = require("../../utils/citys.js");
 var url = getApp().globalData.Url////dd;/
 var userInfo = wx.getStorageSync('userInfo')
-var openid = wx.getStorageSync('openid')
+var openid = null;
 
 Page({
 
@@ -43,6 +43,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+      openid = wx.getStorageSync('openid')
     var that = this;
     console.log('saveAddress')
     console.log(options)
@@ -119,32 +120,32 @@ Page({
       wx.showModal({
         content: '请输入街道地址',
         showCancel: false,
-        success: function (res) {
-          if (res.confirm) {
-            wx.request({
-              url: url + '/wx/saveAddress',
-              data: {
-                'prince': that.data.prince,
-                'city': that.data.city,
-                'district': that.data.district,
-                'street': that.data.street,
-                'default': that.data.defaultSet,
-                'openid':openid,
-                'address_id':that.data.address_id
-              },
-              success: function (rst) {
-                console.log(rst)
-                if (rst.data.success == 1) {
-                  wx.showToast({
-                    title: '修改成功',
-                    icon: 'success',
-                    duration: 2000
-                  })
-                }
-              }
-            })
-          }
-        }
+        // success: function (res) {
+        //   if (res.confirm) {
+        //     wx.request({
+        //       url: url + '/wx/saveAddress',
+        //       data: {
+        //         'prince': that.data.prince,
+        //         'city': that.data.city,
+        //         'district': that.data.district,
+        //         'street': that.data.street,
+        //         'default': that.data.defaultSet,
+        //         'openid':openid,
+        //         'address_id':that.data.address_id
+        //       },
+        //       success: function (rst) {
+        //         console.log(rst)
+        //         if (rst.data.success == 1) {
+        //           wx.showToast({
+        //             title: '修改成功',
+        //             icon: 'success',
+        //             duration: 2000
+        //           })
+        //         }
+        //       }
+        //     })
+        //   }
+        // }
       });
     }else{
       wx.request({
@@ -159,7 +160,6 @@ Page({
           'address_id': that.data.address_id
         },
         success: function (rst) {
-          console.log(rst)
           if (rst.data.success == 1) {
             wx.showToast({
               title: '修改成功',
@@ -169,6 +169,12 @@ Page({
             wx.navigateBack({
               delta: 1
             })
+          }else{
+              wx.showToast({
+                  title: '修改失败',
+                  icon: 'fail',
+                  duration: 2000
+              })
           }
         }
       })
