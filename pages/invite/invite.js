@@ -31,7 +31,11 @@ Page({
    */
   onLoad: function(options) {
       openid = wx.getStorageSync('openid')
-
+      if ((!openid || openid.length == 0) && !getApp().openidReadyCallback) {
+          getApp().openidReadyCallback = function (inOpenid) {
+              openid = inOpenid;
+          }
+      }
     if ('com_id' in options) {
       this.getProductDetail(options.com_id)
     } else {

@@ -28,6 +28,11 @@ Page({
    */
   onLoad: function (options) {
       openid = wx.getStorageSync('openid')
+      if ((!openid || openid.length == 0) && !getApp().openidReadyCallback) {
+          getApp().openidReadyCallback = function (inOpenid) {
+              openid = inOpenid;
+          }
+      }
     if ('com_id' in options) {
       this.getProductDetail(options.com_id)
     } else {
@@ -152,10 +157,16 @@ Page({
       },
       success: function (rst) {
         var content = rst.data;
-        console.log(content);
+        if(content.success == 1){
         wx.navigateTo({
           url: '/pages/invitedDetail/index?com_id=' + that.data.commodity_id + '&status=1&orderNo=' + content.orderNo+'&group_id='+that.data.group_id+'&group_member_id='+content.groupMemberId,
         })
+        }else{
+            wx.showToast({
+                title: '参团失败',
+                duration:2000
+            })
+        }
       }
     })
   },

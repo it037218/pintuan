@@ -314,3 +314,28 @@ page {
   background-color: transparent;
   border-radius: 50%;
 }
+.countDown{
+    display: flex;
+    justify-content: space-between;
+}
+.countDown view{
+    width: 40rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    /* margin: 0 2rpx; */
+    font-size: 24rpx;
+}
+.countDown .time{
+    width: 41rpx;
+	height: 40rpx;
+    background-image: linear-gradient(0deg, 
+		#030000 0%, 
+		#656161 100%), 
+	linear-gradient(
+		#434343, 
+		#434343);
+	background-blend-mode: normal, 
+		normal;
+	border-radius: 8rpx;
+    color: #fff;
+}

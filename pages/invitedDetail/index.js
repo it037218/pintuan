@@ -46,14 +46,30 @@ Page({
         ratio: 1,
         canvasWidth: 0,
         canvasHeight: 0,
-        joinInGroupStatus: false
+        joinInGroupStatus: false,
+        'countSecond': 0,
+        'countMin': 0,
+        'countHour': 0,
+        'countDay': 0
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
+        console.log(options)
         openid = wx.getStorageSync('openid')
+        if ((!openid || openid.length == 0) && !getApp().openidReadyCallback) {
+            getApp().openidReadyCallback = function (inOpenid) {
+                openid = inOpenid;
+            }
+        }
+        if ('order_no' in options) {
+            this.setData({
+                'orderNo': options.order_no
+            })
+            // this.getOrderInfo(options.order_no)
+        }
         if ('group_id' in options) {
             this.checkUserOwner(options.group_id)
             this.setData({
@@ -63,16 +79,11 @@ Page({
             this.checkGroupUserOrder()
         }
         _self = this;
-        this.getCommodityInfo(options.com_id)
+        this.getCommodityInfo(options.com_id,options.group_id)
         this.setData({
             'com_id': options.com_id
         })
-        if ('order_no' in options) {
-            this.setData({
-                'orderNo': options.order_no
-            })
-            this.getOrderInfo(options.order_no)
-        }
+        
         this.getUserInfo()
 
         if ('group_member_id' in options) {
@@ -269,12 +280,13 @@ Page({
             'showRuleContent': !state
         })
     },
-    getCommodityInfo: function (com_id) {
+    getCommodityInfo: function (com_id,group_id) {
         var that = this;
         wx.request({
             url: url + '/wx/getOrderCommodity',
             data: {
-                com_id: com_id
+                com_id: com_id,
+                'group_id':group_id
             },
             success: function (rst) {
                 var content = rst.data;
@@ -286,6 +298,15 @@ Page({
                 that.setData({
                     'commodityInfo': rst.data,
                 })
+                console.log('订单状态')
+                console.log(rst.data)
+                if(rst.data.pay_status == 2003){
+                 
+                }
+                if (that.data.orderNo && that.data.orderNo.length > 0) {
+                    that.getOrderInfo(that.data.orderNo)
+                }
+
             }
         })
     },
@@ -299,6 +320,7 @@ Page({
             },
             success: function (rst) {
                 var data = rst.data;
+                console.log('是否开团')
                 console.log(data)
                 if (data.self.length == 0) {
                     console.log('开团')
@@ -368,6 +390,29 @@ Page({
                     that.setData({
                         'orderStatus': orderStatus
                     })
+                    console.log('订单状态')
+                    console.log(orderStatus)
+                    if(orderStatus == 2003){
+                        console.log('截止时间');
+                        var end_time = that.data.commodityInfo.end_time;
+                        var endTime = new Date(Date.parse(end_time.replace(/-/g, '/')));
+
+                        var difftime = Math.floor((endTime.getTime() - (new Date()).getTime()) / 1000);
+                        var day = Math.floor(difftime / 3600 / 24);
+                        var hour = Math.floor((difftime - day * 3600 * 24) / 3600);
+                        var minute = Math.floor((difftime - day * 3600 * 24 - hour * 3600) / 60);
+                        var second = difftime - day * 3600 * 24 - hour * 3600 - minute * 60;
+                        that.setData({
+                            'countDay': day,
+                            'countHour': hour,
+                            'countMin': minute,
+                            'countSecond': second
+                        })
+                        setInterval(that.countdown, 1000)
+
+
+                        that.checkUserJoinGroup()
+                    }
                 }
             }
         })
@@ -450,7 +495,8 @@ Page({
                 openid: openid,
                 com_id: that.data.com_id,
                 group_member_id: that.data.group_member_id,
-                utm: 'other'
+                utm: 'other',
+                group_id: that.data.group_id
             },
             success: function (rst) {
                 console.log(rst.data);
@@ -563,8 +609,18 @@ Page({
                 console.log(rst)
                 if (rst.data.success == 1) {
                     that.setData({
-                        'orderStatus': rst.data.result.pay_status
+                        'orderStatus': rst.data.result.pay_status,
+                        'orderNo':rst.data.result.order_no
                     })
+                    if (rst.data.result.pay_status == 2003) {
+                        that.checkUserJoinGroup()
+
+                       
+
+
+                    }
+                }else{
+                    
                 }
             }
         })
@@ -617,5 +673,54 @@ Page({
         wx.redirectTo({
             url: '/pages/invite/invite?op=create',
         })
+    },
+    countdown: function () {
+        //是否已经开始
+        if (this.data.countSecond < 1 &&
+            this.data.countMin == 0 &&
+            this.data.countHour == 0 &&
+            this.data.countDay == 0) {
+            clearInterval(this.intervalId);
+        }
+        else {
+            if (this.data.countSecond < 1) {
+                this.setData({
+                    countSecond: 59
+                });
+                if (this.data.countMin < 1) {
+                    this.setData({
+                        countMin: 59
+                    });
+                    if (this.data.countHour < 1) {
+                        this.setData({
+                            countHour: 23
+                        });
+                        if(this.data.countDay>=1){
+                            this.setData({
+                                countDay:this.data.countDay-1
+                            })
+                        }else{
+                            this.setData({
+                                countDay: 0
+                            })
+                        }
+                    }else{
+                        this.setData({
+                            countHour: this.data.coutHour-1
+                        });
+                    }
+                }
+                else {
+                    this.setData({
+                        countMin: this.data.countMin - 1
+                    });
+                }
+            }
+            else {
+                this.setData({
+                    countSecond: this.data.countSecond - 1
+                });
+            }
+        }
     }
 })

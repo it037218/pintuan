@@ -30,10 +30,20 @@
         <text class='status-desc' wx:if="{{orderStatus == 2005}}">已结束  拼团成功</text>
         <text class='status-desc' wx:if="{{orderStatus == 2004}}">拼团失败</text>
 
-        <!-- <view class='left-time'>
-          <view>支付剩余时间</view>
-          <view>28:20</view>
-        </view> -->
+        <view class='left-time' wx:if="{{orderStatus==2003}}">
+                    <view style='margin-right:10rpx;'>距离结束还剩</view>
+                    <view class='countDown'>
+                        <view class='time'>{{countDay}}</view>
+                         <view class='word'>天</view>
+                        <view class='time'>{{countHour}}</view>
+                        <view class='word'>时</view>
+                        <view class='time'>{{countMin}}</view>
+                        <view class='day'>分</view>
+                        <view class='time'>{{countSecond}}</view>
+                        <view class='day'>秒</view>
+
+                    </view>
+                </view>
       </view>
     </view>
     <view class='member_content'>
@@ -93,12 +103,12 @@
 
         <view class='address' wx:if="{{address.id}}">
           <view class='edit'></view>
-          <input placeholder='请输入您的地址 ' value='{{address.prince}}  {{address.city}}  {{address.district}} {{address.street}}' bindfocus='editAddress' data-id="{{address.id}}"></input>
+          <input placeholder='请输入您的地址 ' value='{{address.prince}}  {{address.city}}  {{address.district}} {{address.street}}' bindtap='editAddress' data-id="{{address.id}}"></input>
         </view>
 
         <view class='address' wx:if="{{!address.id}}" >
           <view class='edit' ></view>
-          <input placeholder='请输入您的地址' bindfocus='editAddress' data-id=""></input>
+          <input placeholder='请输入您的地址' bindtap='editAddress' data-id=""></input>
         </view>
       </view>
     </view>
@@ -108,7 +118,7 @@
 
   <!--待支付-->
   <view class='option-content'>
-    <view class='status3' wx:if="{{orderStatus==2002}}">
+    <view class='status3' wx:if="{{orderStatus==2002}}" bindtap='payment'>
         <view>微信支付 ￥{{commodityInfo.tuan_price}}元</view>
     </view>
       <view class='status4' wx:if="{{orderStatus==2000}}" bindtap='joinIn'>

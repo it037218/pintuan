@@ -24,6 +24,9 @@ App({
                 var user_openid = content.content.openid;
                 wx.setStorageSync('userInfo', content.content)
                 wx.setStorageSync('openid', user_openid)
+                if (getApp().openidReadyCallback) {
+                    getApp().openidReadyCallback(user_openid);
+                }
               }
             }
           })

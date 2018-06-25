@@ -269,7 +269,7 @@ Page({
       }
     })
   },
-  getGeoupDetail: function() {
+  getGroupDetail: function() {
     var utm = this.data.utm;
     var group_id = this.data.group_id;
     var com_id = this.data.com_id

@@ -21,7 +21,7 @@
             </view>
         </view>
     </view>
-    <view wx:if="{{orderStatus==2000||orderStatus==2002 || orderStatus==2003 || orderStatus == 2004 || orderStatus == 2005}}" style='padding-bottom:80rpx'>
+    <view wx:if="{{orderStatus==2000||orderStatus==2002 || orderStatus==2003 || orderStatus == 2004 || orderStatus == 2005}}">
         <view class='order_content'>
             <!--待支付-->
             <view class='status0'>
@@ -29,23 +29,23 @@
                 <text class='status-desc' wx:if="{{orderStatus == 2003}}">拼团中 <text style='color:#000'>已有{{memberNumber}}人拼团成功</text></text>
                 <text class='status-desc' wx:if="{{orderStatus == 2005}}">已结束  拼团成功</text>
                 <text class='status-desc' wx:if="{{orderStatus == 2004}}">拼团失败</text>
-
                 <view class='left-time' wx:if="{{orderStatus==2003}}">
                     <view style='margin-right:10rpx;'>距离结束还剩</view>
                     <view class='countDown'>
                         <view class='time'>{{countDay}}</view>
-                         <view class='word'>天</view>
+                        <view class='word'>天</view>
                         <view class='time'>{{countHour}}</view>
                         <view class='word'>时</view>
                         <view class='time'>{{countMin}}</view>
                         <view class='day'>分</view>
                         <view class='time'>{{countSecond}}</view>
+                        <view class='day'>秒</view>
 
                     </view>
                 </view>
             </view>
         </view>
-        <view class='member_content' wx:if="{{orderStatus !=2002}}">
+        <view class='member_content'>
 
             <block wx:for="{{memberList}}">
                 <view wx:if="{{index==0}}">
@@ -59,16 +59,20 @@
                 </view>
 
 
-                <view wx:elif="{{index>0 && item.openid}}" bindtap='getUserDetail' data-openid="{{item.openid}}">
+                <view wx:elif="{{index>0 && item.openid && orderStatus==2005}}" bindtap='getUserDetail' data-openid="{{item.openid}}">
                     <image src='{{item.avatar_url}}'></image>
-                    <text class='shenfen' wx:if="{{orderStatus==2005}}">联系TA</text>
+                    <text class='shenfen'>联系TA</text>
+                </view>
+                <view wx:elif="{{index>0 && item.openid && orderStatus!=2005}}" data-openid="{{item.openid}}">
+                    <image src='{{item.avatar_url}}'></image>
+                    <!-- <text class='shenfen'>联系TA</text> -->
                 </view>
                 <view wx:else>
                     <image src='https://pintuan.guangxing.club/wximg/member.png'></image>
                 </view>
             </block>
         </view>
-        <text class='groupNum1' wx:if="{{orderStatus !=2002}}">已开团数  {{groupNumber}} </text>
+        <text class='groupNum1'>已开团数  {{groupNumber}} </text>
         <view class='show-rules' wx:if="{{orderStatus !=2002}}">
             <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
                 拼团玩法
@@ -127,26 +131,53 @@
     <!--待支付-->
     <view class='option-content'>
         <view class='status3' wx:if="{{orderStatus==2002}}" bindtap='payment'>
-            <view>微信支付 ￥{{commodityInfo.tuan_price}}元</view>
+            <view>
+             <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
+                    <button form-type='submit' plain='true' style='color:#fff;height:88rpx;line-height:88rpx!important'>
+            微信支付 ￥{{commodityInfo.tuan_price}}元
+            </button>
+            </form>
+            </view>
 
         </view>
         <!--微信支付-->
         <view class='status3' wx:if="{{orderStatus==2001}}" bindtap='payment'>
-            <view>微信支付 ￥{{commodityInfo.tuan_price}}元</view>
+
+            <view>
+                <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
+                    <button form-type='submit' plain='true' style='color:#fff;height:88rpx;line-height:88rpx!important'>
+                        微信支付 ￥{{commodityInfo.tuan_price}}元
+                    </button>
+                </form>
+
+            </view>
         </view>
         <!--邀请好友拼团-->
         <!-- <form bindsubmit='formSubmit' report-submit='true'>
       <button form-type='submit' plain='true'> -->
         <view class='status4' wx:if="{{orderStatus==2003}}">
 
-            <view bindtap='shareToFriend'>邀请好友拼团</view>
+
+            <view bindtap='shareToFriend'>
+                <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
+                    <button form-type='submit' plain='true' style='color:#fff;height:88rpx;line-height:88rpx!important'>
+                        邀请好友拼团
+                    </button>
+                </form>
+            </view>
 
         </view>
         <!-- </button>
     </form> -->
         <!--拼团成功-->
         <view class='status5' wx:if="{{orderStatus==2005}}">
-            <view>拼团已成功 去查看你的成员们吧</view>
+            <view>
+                <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
+                    <button form-type='submit' plain='true' style='color:#09bb07;height:88rpx;line-height:88rpx!important'>
+                        拼团已成功 去查看你的成员们吧
+                    </button>
+                </form>
+            </view>
         </view>
         <!-- <view class='status6' wx:if="{{orderStatus==2004}}">
       <view>一键重新开团</view>

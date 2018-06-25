@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 1,
+			"current": 8,
 			"list": [
 				{
 					"id": -1,
@@ -69,7 +69,7 @@
 					"id": 5,
 					"name": "开团-02-拼团中",
 					"pathName": "pages/inviteDetail/index",
-					"query": "com_id=4"
+					"query": "group_id=119&com_id=4&order_no=2018062600583094591"
 				},
 				{
 					"id": -1,
@@ -87,7 +87,7 @@
 					"id": 8,
 					"name": "被邀请开团",
 					"pathName": "pages/invitedDetail/index",
-					"query": "com_id=4&group_id=50"
+					"query": "com_id=4&group_id=92"
 				},
 				{
 					"id": -1,

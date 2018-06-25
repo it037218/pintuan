@@ -17,7 +17,7 @@
         </button>
       </view>
       <view class='shape-3'>
-        <button bindtap='getGeoupDetail'>拼团详情</button>
+        <button bindtap='getGroupDetail'>拼团详情</button>
 
       </view>
     </view>
