@@ -90,9 +90,6 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
-  },
 
   tabClick: function (e) {
     this.setData({
@@ -139,7 +136,7 @@ Page({
   },
   formSubmit: function (e) {
     var app = getApp();
-    app.submitFormId(e.detail.formId);
+    app.submitFormId(openid,e.detail.formId);
   },
   createGroup:function(){
     wx.redirectTo({

@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e758c421-2a07-4adc-b5b7-d714bc3166fa" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/invite/invite.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/invite/invite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/inviteDetail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/inviteDetail/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/inviteDetail/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/inviteDetail/index.wxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/inviteDetail/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/inviteDetail/index.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/invited/invited.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/invited/invited.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/invitedDetail/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/invitedDetail/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/invitedDetail/index.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/invitedDetail/index.wxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/invitedDetail/index.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/invitedDetail/index.wxss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/payresult/payresult.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/payresult/payresult.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/payresult/payresult.wxml" beforeDir="false" afterPath="$PROJECT_DIR$/pages/payresult/payresult.wxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/user.json" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/user.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/orderList/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/orderList/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/payresult/payresult.wxss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/payresult/payresult.wxss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project.config.json" beforeDir="false" afterPath="$PROJECT_DIR$/project.config.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,7 +23,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -63,7 +63,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -80,6 +79,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -113,17 +113,17 @@
       <workItem from="1529055542626" duration="682000" />
       <workItem from="1529495926734" duration="6000" />
       <workItem from="1529894875237" duration="86000" />
+      <workItem from="1529990259259" duration="1293000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1433000" />
+    <option name="totallyTimeSpent" value="2726000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="797" extended-state="6" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1440" height="800" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26037195" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2639485" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -132,7 +132,7 @@
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.074285716" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.07396871" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />

@@ -40,6 +40,8 @@ width: 520rpx;
   top: 0;
   left: 0;
   background-color: rgba(0,0,0,0.4);
+    z-index: 1001;
+
 }
 .share-content .share-option{
   position: absolute;

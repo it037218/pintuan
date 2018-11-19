@@ -1,78 +1,129 @@
 <view class='cover_img'>
-  <swiper indicator-dots="" autoplay="true" interval="5000" duration="">
-    <block wx:for="{{productInfo.adImages}}">
-      <swiper-item>
-        <image src="https://pintuan.guangxing.club{{item.path}}" class="slide-image" />
-      </swiper-item>
-    </block>
-  </swiper>
+    <swiper indicator-dots="" autoplay="true" interval="5000" duration="">
+        <block wx:for="{{productInfo.adImages}}">
+            <swiper-item>
+                <image src="https://pintuan.guangxing.club{{item.path}}" class="slide-image" />
+            </swiper-item>
+        </block>
+    </swiper>
 </view>
 <view style='padding-bottom: 80rpx;'>
-  <view class='title'>
-    <view class='special-text'>{{productInfo.full_number}}人团</view>
-    <view>{{productInfo.name}}</view>
-  </view>
-  <view class='desc'>
-    {{productInfo.description}}
-  </view>
-  <view class='price-content'>
-    <text>￥{{productInfo.tuan_price}}</text>
-    <text style='margin-left:20rpx;'>拼团价</text>
-    <text>￥{{productInfo.market_price}}</text>
-    <text>已开团 {{productInfo.tuan_number}}</text>
-  </view>
-
-  <view class='show-rules'>
-    <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
-      <form bindsubmit='formSubmit' report-submit='true'>
-        <button bindtap='getGroupDetail' form-type='submit' plain='true' style='border:none;line-height:80rpx;display:inline-block;height:80rpx;padding-left:0;'>拼团玩法</button>
-      </form>
-      <text class='icon '></text>
+    <view class='title'>
+        <view class='special-text'>{{productInfo.full_number}}人团</view>
+        <view>{{productInfo.name}}</view>
     </view>
-  </view>
-
-  <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
-    <rich-text nodes="{{productInfo.rule}}" bindtap="tap"></rich-text>
-
-  </view>
-
-  <view class='show-details'>
-    <view>
-      商品详情
+    <view class='desc'>
+        {{productInfo.description}}
     </view>
-    <rich-text nodes="{{productInfo.detail}}" bindtap="tap"></rich-text>
+    <view class='price-content'>
+        <text>￥{{productInfo.tuan_price}}</text>
+        <text style='margin-left:20rpx;'>拼团价</text>
+        <text>￥{{productInfo.market_price}}</text>
+        <text>已开团 {{productInfo.tuan_number}}</text>
+    </view>
 
-  </view>
+    <view class='show-rules'>
+        <view class='show-rules-title {{showRuleState?"icon_down_rotate":""}}' bindtap='onChangeShowState'>
+            <form bindsubmit='formSubmit' report-submit='true'>
+                <button bindtap='getGroupDetail' form-type='submit' plain='true' style='border:none;line-height:80rpx;display:inline-block;height:80rpx;padding-left:0;'>拼团玩法</button>
+            </form>
+            <text class='icon '></text>
+        </view>
+    </view>
+
+    <view class='show-rules-content {{showRuleContent?"showRuleContentOn":""}}'>
+        <rich-text nodes="{{productInfo.rule}}" bindtap="tap"></rich-text>
+
+    </view>
+
+    <view class='show-details'>
+        <view>
+            商品详情
+        </view>
+        <rich-text nodes="{{productInfo.detail}}" bindtap="tap"></rich-text>
+
+    </view>
 </view>
 
 <!--一键开团-->
-<view class='option-content'>
-  <!-- <form bindsubmit='formSubmit' report-submit='true'>
+<view class='option-content' wx:if="{{!hasExpired}}">
+    <!-- <form bindsubmit='formSubmit' report-submit='true'>
     <button form-type='submit' plain='true' style='border:none;line-height:88rpx;display:inline-block;height:88rpx;padding:0;margin-left:30rpx;'> -->
-  <view class='status0' wx:if="{{productStatus == 0}}">
-    <view wx:if="{{userStatus==0}}">
-      <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;' bindgetuserinfo="bindGetUserInfo">￥{{productInfo.tuan_price}} 一键开团</button>
-    </view>
-    <view wx:if="{{userStatus==1}}" bindtap='createOrder'>￥{{productInfo.tuan_price}} 一键开团</view>
-  </view>
+    <view class='status10' wx:if="{{productStatus == 0}}">
+        <view wx:if="{{userStatus==0}}">
+            <button open-type="getUserInfo" style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;padding:0!important' bindgetuserinfo="bindGetUserInfo">￥{{productInfo.tuan_price}} 一键开团</button>
+            <button style='background-color:#F9BA3E;color:#fff;height:100%;line-height:88rpx;' bindtap='createPersonPoster'>邀请好友开团</button>
 
-  <!--支付未完成-->
-  <view class='status1' wx:if="{{productStatus == 1}}">
-    <view style='display:inline-block'>支付未完成 继续开团</view>
-    <!-- <view class='count-down'>
-      <text class='clock'></text>
-      <text>28:26</text>
-    </view> -->
-  </view>
-  <!--待支付-->
-  <view class='status2' wx:if="{{productInfo.status == 2}}">
-    <view>
-      取消
+        </view>
+
+        <view wx:if="{{userStatus==1}}">
+            <button style='background-color:#e94f4f;color:#fff;height:100%;line-height:88rpx;;padding:0!important' bindtap='createOrder'>
+                ￥{{productInfo.tuan_price}} 一键开团
+            </button>
+            <button style='background-color:#F9BA3E;color:#fff;height:100%;line-height:88rpx;' bindtap='createPersonPoster'>
+                邀请好友开团
+            </button>
+        </view>
     </view>
-    <view>
-      去支付
+
+    <!--支付未完成-->
+    <view class='status1' wx:if="{{productStatus == 1}}">
+        <view style='display:inline-block'>支付未完成 继续开团</view>
     </view>
-  </view>
-  <!-- </button>
-  </form> -->
+    <!--待支付-->
+    <view class='status2' wx:if="{{productInfo.status == 2}}">
+        <view>
+            取消
+        </view>
+        <view>
+            去支付
+        </view>
+    </view>
+    <!--支付未完成-->
+    <view class='status1' wx:if="{{productStatus == 10000}}">
+        <view style='display:inline-block' bindtap='payContinue'>继续支付</view>
+    </view>
 </view>
+<view>
+    <view class='share-content' wx:if="{{showSharePoster}}" bindtap='closePoster'>
+
+        <canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;background-color:#fff;positon:absolute;top:0rpx;left:0rpx;border-radius:0rpx;" canvas-id="firstCanvas" bindlongtap='saveSharePoster'></canvas>
+    </view>
+</view>
+
+<view class='share-content' wx:if="{{showCreatePerson}}">
+    <view class='already-full'>
+        <view class='notice-title'>
+            邀请好友开团
+        </view>
+        <view class='notice-text' style=''>
+            生成专属海报 邀请好友参与
+        </view>
+        <form bindsubmit="formSubmit">
+            <view class='notice-text'>
+                <input class="weui-input" placeholder="请输入您的微信号" bindinput='saveWXID' />
+            </view>
+            <button bindtap='shareToTimeLine'>生成海报</button>
+        </form>
+    </view>
+</view>
+<view class='share-content' wx:if="{{hasExpired && showExpired}}">
+    <view class='already-full'>
+        <view class='notice-text' style='margin-top:86rpx;'>
+            活动已结束
+        </view>
+        <view class='notice-text'>
+            好商机~不可失
+        </view>
+        <view class='notice-text'>
+            下次早点来哦~
+        </view>
+        <view class='button-list'>
+            <button bindtap='closeModel'>我知道了</button>
+        </view>
+    </view>
+</view>
+
+
+<view class='backToIndex' bindtap='backToOrderList'>
+    <view class='index-icon'> </view>我的拼团</view>

@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.1.0",
+	"libVersion": "2.2.0",
 	"appid": "wx6e4a194cd3ea0eab",
 	"projectname": "pintuan-dev",
 	"isGameTourist": false,
@@ -33,16 +33,16 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 8,
+			"current": 1,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "用户信息",
 					"pathName": "pages/user/user",
-					"query": ""
+					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
 				},
 				{
-					"id": 2,
+					"id": 1,
 					"name": "开团-01-商品详情 - 一键开团",
 					"pathName": "pages/invite/invite",
 					"query": ""
@@ -63,7 +63,7 @@
 					"id": 4,
 					"name": "开团-02-支付成功",
 					"pathName": "pages/payresult/payresult",
-					"query": "com_id=4&utm=self&group_id=37"
+					"query": "com_id=4&type=other&group_id=55&utm=self"
 				},
 				{
 					"id": 5,
@@ -72,10 +72,10 @@
 					"query": "group_id=119&com_id=4&order_no=2018062600583094591"
 				},
 				{
-					"id": -1,
+					"id": 6,
 					"name": "开团-02-拼团成功",
 					"pathName": "pages/inviteDetail/index",
-					"query": "status=4"
+					"query": ""
 				},
 				{
 					"id": -1,
@@ -87,7 +87,7 @@
 					"id": 8,
 					"name": "被邀请开团",
 					"pathName": "pages/invitedDetail/index",
-					"query": "com_id=4&group_id=92"
+					"query": "com_id=4&group_id=148&utm=other"
 				},
 				{
 					"id": -1,
@@ -100,6 +100,160 @@
 					"name": "拼团列表",
 					"pathName": "pages/orderList/index",
 					"query": "openid=osQX64qNqo31C9LffehUmQBOjUUw"
+				},
+				{
+					"id": -1,
+					"name": "商品详情",
+					"pathName": "pages/invite/invite",
+					"query": "scene=osQX64qNqo31C9LffehUmQBOjUUw"
+				},
+				{
+					"id": -1,
+					"name": "海报页面",
+					"pathName": "pages/invite/invite",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "海报页面",
+					"pathName": "pages/poster/poster",
+					"query": "commId=4&type=person"
+				},
+				{
+					"id": -1,
+					"name": "被邀请开团",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=220"
+				},
+				{
+					"id": -1,
+					"name": "被邀请开团",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=220&type=person"
+				},
+				{
+					"id": -1,
+					"name": "被邀请开团",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=49&type=person"
+				},
+				{
+					"id": -1,
+					"name": "被邀请开团",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=49&type=other"
+				},
+				{
+					"id": -1,
+					"name": "被邀请开团",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=49&type=self"
+				},
+				{
+					"id": -1,
+					"name": "被邀请开团",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=49&type=person"
+				},
+				{
+					"id": -1,
+					"name": "海报页面",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=49&type=person&wx_id=ivan"
+				},
+				{
+					"id": -1,
+					"name": "海报页面",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&group_id=49&type=other"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&type=other&group_id=63"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/poster/poster",
+					"query": "com_id=4&type=other&group_id=66"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invice/invite",
+					"query": "osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "scence=osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "scence=osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "scene=osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "scene=osQX64t09SM3VF9kPtrKCMOhH-CM",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "scene=osQX64nFislZ47GfPHN5gzrGl1rY",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "开团-02-支付成功",
+					"pathName": "pages/invite/invite",
+					"query": "scene=osQX64ksSR3LWRLTGH3UlCWQyFtc",
+					"scene": "1011"
+				},
+				{
+					"id": -1,
+					"name": "授权页面",
+					"pathName": "pages/authorize/index",
+					"query": ""
 				}
 			]
 		}

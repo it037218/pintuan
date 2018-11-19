@@ -1,105 +1,97 @@
 <view class="page">
-  <view class="page__bd">
-    <view class="weui-tab">
-      <view class="weui-navbar">
-        <block wx:for="{{tabs}}" wx:key="*this">
-          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-            <form bindsubmit='formSubmit' report-submit='true'>
-              <button form-type='submit' plain='true'>
-                <view class="weui-navbar__title">
-                  {{item}}
-                </view>
-              </button>
-            </form>
-          </view>
-        </block>
-        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
-      </view>
-      <view class="weui-tab__panel">
-        <!--我的开团-->
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}" style='position:relative'>
-          <view wx:for="{{selfGroup}}" wx:for-item="group">
-            <view class='commodity_item' data-orderNo="{{group.order_no}}" data-comId='{{group.com_id}}' data-groupid='{{group.id}}' bindtap='getSelfGroup'>
-              <view class='groupNum'>
-                <view>
-                  <view>{{group.full_number}}人团</view>
-                </view>
-              </view>
-
-              <view class='commodity_wrapper'>
-
-                <view class='cover_img'>
-                  <image src='https://pintuan.guangxing.club{{group.path}}'>
-                  </image>
-                </view>
-                <view class='commodity_content'>
-                  <view class='name'>{{group.name}}</view>
-                  <view class='group_number'>参团人数：{{group.valide_member_number}}人</view>
-                  <view class='desc'>开团日期：{{group.created_at}}</view>
-                  <view class='other'>
-                    <view>
-                      <text>￥{{group.price}}</text>
-                      <text>拼团价</text>
+    <view class="page__bd">
+        <view class="weui-tab">
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <form bindsubmit='formSubmit' report-submit='true'>
+                            <button form-type='submit' plain='true'>
+                                <view class="weui-navbar__title">
+                                    {{item}}
+                                </view>
+                            </button>
+                        </form>
                     </view>
-                    <view>查看详情></view>
-                  </view>
-
-                </view>
-
-              </view>
-
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
             </view>
-          </view>
+            <view class="weui-tab__panel">
+                <!--我的开团-->
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}" style='position:relative;min-height:500rpx;'>
+                    <view wx:for="{{selfGroup}}" wx:for-item="group">
+                        <view class='commodity_item' data-orderNo="{{group.order_no}}" data-comId='{{group.com_id}}' data-groupid='{{group.id}}' bindtap='getSelfGroup'>
+                            <view class='groupNum'>
+                                <view>
+                                    <view>{{group.full_number}}人团</view>
+                                </view>
+                            </view>
 
-          <form bindsubmit='formSubmit' report-submit='true'>
-            <view class="button-sp-area">
+                            <view class='commodity_wrapper'>
 
-              <button class="weui-btn" type="primary" bindtap='createGroup' form-type='submit' style='width: 330rpx;height: 88rpx;line-height: 88rpx;text-align: center;border-radius: 10rpx;line-height:88rpx!important;  font-size: 36rpx;position:fixed;bottom:30rpx;left:210rpx;'
-                wx:if="{{createGroup}}">
-                <view class="weui-navbar__title">
-                  我要开团
-                </view>
-              </button>
-            </view>
-          </form>
-        </view>
-        <!--我的参团-->
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                                <view class='cover_img'>
+                                    <image src='https://pintuan.guangxing.club{{group.path}}'>
+                                    </image>
+                                </view>
+                                <view class='commodity_content'>
+                                    <view class='name'>{{group.name}}</view>
+                                    <view class='group_number'>参团人数：{{group.valide_member_number}}人</view>
+                                    <view class='desc'>开团日期：{{group.created_at}}</view>
+                                    <view class='other'>
+                                        <view>
+                                            <text>￥{{group.price}}</text>
+                                            <text>拼团价</text>
+                                        </view>
+                                        <view>查看详情></view>
+                                    </view>
 
-          <view wx:for="{{otherGroup}}" wx:for-item="group">
-            <view class='commodity_item' data-orderNo="{{group.order_no}}" data-comId='{{group.com_id}}' data-groupid='{{group.id}}' bindtap='getOtherGroup'>
-              <view class='groupNum'>
-                <view>
-                  <view>{{group.full_number}}人团</view>
-                </view>
-              </view>
+                                </view>
 
-              <view class='commodity_wrapper'>
+                            </view>
 
-                <view class='cover_img'>
-                  <image src='https://pintuan.guangxing.club{{group.path}}'></image>
-                </view>
-                <view class='commodity_content'>
-                  <view class='name'>{{group.name}}</view>
-                  <view class='group_number'>参团人数：{{group.valide_member_number}}人</view>
-                  <view class='desc'>开团日期：{{group.created_at}}</view>
-                  <view class='other'>
-                    <view>
-                      <text>￥{{group.price}}</text>
-                      <text>拼团价</text>
+                        </view>
                     </view>
-                    <view>查看详情></view>
-                  </view>
-
+                    <button class="weui-btn" type="primary" bindtap='createGroup' form-type='submit' style='width: 330rpx;height: 88rpx;line-height: 88rpx;text-align: center;border-radius: 10rpx;line-height:88rpx!important;  font-size: 36rpx;position:absolute;bottom:30rpx;left:210rpx;'
+                        wx:if="{{createGroup}}">
+                        我要开团
+                    </button>
                 </view>
+                <!--我的参团-->
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
 
-              </view>
+                    <view wx:for="{{otherGroup}}" wx:for-item="group">
+                        <view class='commodity_item' data-orderNo="{{group.order_no}}" data-comId='{{group.com_id}}' data-groupid='{{group.id}}' bindtap='getOtherGroup'>
+                            <view class='groupNum'>
+                                <view>
+                                    <view>{{group.full_number}}人团</view>
+                                </view>
+                            </view>
 
+                            <view class='commodity_wrapper'>
+
+                                <view class='cover_img'>
+                                    <image src='https://pintuan.guangxing.club{{group.path}}'></image>
+                                </view>
+                                <view class='commodity_content'>
+                                    <view class='name'>{{group.name}}</view>
+                                    <view class='group_number'>参团人数：{{group.valide_member_number}}人</view>
+                                    <view class='desc'>开团日期：{{group.created_at}}</view>
+                                    <view class='other'>
+                                        <view>
+                                            <text>￥{{group.price}}</text>
+                                            <text>拼团价</text>
+                                        </view>
+                                        <view>查看详情></view>
+                                    </view>
+
+                                </view>
+
+                            </view>
+
+                        </view>
+                    </view>
+                </view>
             </view>
-          </view>
         </view>
-      </view>
     </view>
-  </view>
 
 </view>

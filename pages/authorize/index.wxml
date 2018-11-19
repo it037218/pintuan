@@ -1,0 +1,20 @@
+<view style='height:374rpx;border-bottom:1px solid #a0a0a0;width:100%;padding-top:1px'>
+    <view class='logo'>
+        拼货源
+    </view>
+</view>
+
+<view class='description'>
+    <view class='t1'>
+    拼货源将申请授权使用您以下信息，并将保护您的用户隐私
+    </view>
+    <view class='t2'>
+    <view class='point'></view>获取您的公开信息（昵称、头像等）
+    </view>
+</view>
+
+
+<button open-type="getUserInfo" class='auth-button' bindgetuserinfo="bindGetUserInfo">
+确认授权
+
+</button>

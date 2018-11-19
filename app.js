@@ -22,6 +22,13 @@ App({
               var content = rst.data;
               if(content.success == 1){
                 var user_openid = content.content.openid;
+
+              
+
+
+
+
+
                 wx.setStorageSync('userInfo', content.content)
                 wx.setStorageSync('openid', user_openid)
                 if (getApp().openidReadyCallback) {
@@ -73,13 +80,11 @@ App({
     domainUrl:'https://pintuan.guangxing.club',
     openid:wx.getStorageSync('openid')
   },
-  submitFormId: function (formId) {
-    console.log('formId')
-    console.log(formId)
+  submitFormId: function (openid,formId) {
     wx.request({
       url: this.globalData.Url +'/wx/saveFormId',
       data: {
-        openid: this.globalData.openid,
+        openid: openid,
         formId: formId
       },
       success: function (ret) {

@@ -10,7 +10,7 @@
             <view class='product_img'>
                 <image src='{{commodityInfo.images}}'></image>
             </view>
-            <view style='width:360rpx;box-sizing:border-box'>
+            <view style='width:420rpx;box-sizing:border-box'>
                 <view class='title'>{{commodityInfo.name}}</view>
                 <view class='desc'>{{commodityInfo.description}}</view>
                 <view class='price'>
@@ -113,15 +113,15 @@
                     <input placeholder='请输入您的微信号' value='{{userInfo.wx_id}}' bindblur="saveUserWxid"></input>
                 </view>
 
-                <view class='address' wx:if="{{address.id}}">
+                <!-- <view class='address' wx:if="{{address.id}}">
                     <view class='edit'></view>
                     <input placeholder='请输入您的地址 ' value='{{address.prince}}  {{address.city}}  {{address.district}} {{address.street}}' bindtap='editAddress' data-id="{{address.id}}"></input>
-                </view>
+                </view> -->
 
-                <view class='address' wx:if="{{!address.id}}">
+                <!-- <view class='address' wx:if="{{!address.id}}">
                     <view class='edit'></view>
                     <input placeholder='请输入您的地址' bindtap='editAddress' data-id=""></input>
-                </view>
+                </view> -->
             </view>
         </view>
 
@@ -129,14 +129,14 @@
 
 
     <!--待支付-->
-    <view class='option-content'>
+    <view class='option-content' wx:if="{{!hasExpired}}">
         <view class='status3' wx:if="{{orderStatus==2002}}" bindtap='payment'>
             <view>
-             <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
+                <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
                     <button form-type='submit' plain='true' style='color:#fff;height:88rpx;line-height:88rpx!important'>
-            微信支付 ￥{{commodityInfo.tuan_price}}元
-            </button>
-            </form>
+                        微信支付 ￥{{commodityInfo.tuan_price}}元
+                    </button>
+                </form>
             </view>
 
         </view>
@@ -167,8 +167,6 @@
             </view>
 
         </view>
-        <!-- </button>
-    </form> -->
         <!--拼团成功-->
         <view class='status5' wx:if="{{orderStatus==2005}}">
             <view>
@@ -179,9 +177,28 @@
                 </form>
             </view>
         </view>
-        <!-- <view class='status6' wx:if="{{orderStatus==2004}}">
-      <view>一键重新开团</view>
-    </view> -->
+
+        <!--拼团失败-->
+        <!-- <view class='status5' wx:if="{{orderStatus==2004}}">
+            <view>
+                <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
+                    <button form-type='submit' plain='true' style='color:#09bb07;height:88rpx;line-height:88rpx!important'>
+                        您拼团拼团已失败
+                    </button>
+                </form>
+            </view>
+        </view> -->
+
+        <view class='status3' wx:if="{{orderStatus==2005 && createNew}}" bindtap='createNew'>
+            <view>
+                <form bindsubmit='formSubmit' report-submit='true' style='height:88rpx;'>
+                    <button form-type='submit' plain='true' style='color:#fff;height:88rpx;line-height:88rpx!important'>
+                        继续开团
+                    </button>
+                </form>
+            </view>
+
+        </view>
     </view>
 
     <view class='share-content' wx:if="{{showShare}}">
@@ -200,9 +217,35 @@
         </view>
     </view>
     <view>
-        <view class='share-content' wx:if="{{showSharePoster}}" bindtap='closePoster'>
+        <view class='share-content' wx:if='{{showSharePoster}}' bindtap='closePoster'>
 
-            <canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;background-color:#fff;positon:absolute;top:127rpx;left:45rpx;border-radius:10rpx;" canvas-id="firstCanvas" bindlongtap='saveSharePoster'></canvas>
+            <canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;background-color:#fff;positon:absolute;top:0rpx;left:0rpx;border-radius:10rpx;" canvas-id="firstCanvas" bindlongtap='saveSharePoster'></canvas>
+        </view>
+    </view>
+</view>
+
+<view class='contact' wx:if="{{orderStatus==2005 || orderStatus==2004}}">
+    <button open-type="contact" />
+</view>
+<view class='backToIndex' bindtap='backToOrderList'>
+    <view class='index-icon'> </view>返回首页</view>
+
+<view class='share-content' wx:if="{{hasExpired && showExpired}}">
+    <view class='already-full'>
+        <view style='width:100%;height:100%;positon:relative;'>
+           <view class='modal-cancel' bindtap='hideCancelModal'></view>
+            <view class='notice-text' style='margin-top:86rpx;'>
+                活动已结束
+            </view>
+            <view class='notice-text'>
+                好商机~不可失
+            </view>
+            <view class='notice-text'>
+                下次早点来哦~
+            </view>
+            <view class='button-list'>
+                <button bindtap='closeModel'>我知道了</button>
+            </view>
         </view>
     </view>
 </view>

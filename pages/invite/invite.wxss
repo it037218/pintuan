@@ -17,6 +17,7 @@ page {
 
 swiper image {
   width: 100%;
+  height: 100%;
 }
 
 .title {
@@ -87,4 +88,138 @@ swiper image {
 rich-text img{
   width: 100%;
 
+}
+.option-content .status10 view{
+    display: flex;
+  justify-content: space-around;
+}
+.option-content .status10 view button{
+  width: 330rpx;
+  margin: 0 auto;
+  text-align: center;
+  color: #fff;
+  font-size: 36rpx;
+  /* background-color: #e94f4f; */
+  height: 88rpx;
+  line-height: 88rpx;
+  border-radius: 8rpx;
+  overflow: hidden;
+}
+
+.share-content{
+  position: fixed;
+  width: 750rpx;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1001;
+}
+.share-content .share-option{
+  position: absolute;
+  left: 0;
+top:0;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+/* .share-content .share-option image{
+  width: 150rpx;
+  height: 150rpx;
+} */
+/* .share-content .share-option view{
+  text-align: center;
+} */
+/* .share-content .share-option view view{
+  color: #fff;
+  text-align: center;
+  	font-size: 30rpx;
+} */
+/* .share-content .share-cancel{
+  position: absolute;
+  left:0;
+  bottom: 11rpx;
+  text-align: center;
+  width: 100%;
+} */
+/* .share-content .share-cancel image{
+  width: 48rpx;
+  height: 48rpx;
+} */
+
+.share-content .already-full{
+    background-color: #fff;
+    width: 620rpx;
+    height: 460rpx;
+    border-radius: 8rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -310rpx;
+    margin-top: -230rpx;
+}
+.already-full .notice-text{
+    text-align: center;
+    font-size: 30rpx;
+    line-height: 70rpx;
+}
+.already-full .notice-title{
+    font-size: 40rpx;
+    text-align: center;
+    margin-top: 30rpx;
+    color: #FFBB01;
+}
+.already-full button{
+    width: 450rpx;
+	height: 88rpx;
+	background-color: #e94f4f;
+	border-radius: 10rpx;
+	border: solid 2rpx #d64949;
+    margin-top:55rpx;
+    color: #fff;
+}
+.notice-text{
+    text-align: center
+}
+.notice-text input{
+    background-color: #eee;
+    width: 400rpx;
+    margin: 0 auto;
+    border-radius: 5rpx;
+    text-align: left;
+    padding-left: 25rpx;
+
+}
+swiper{
+    height: 350rpx;
+}
+.share-content .already-full{
+    background-color: #fff;
+    width: 620rpx;
+    height: 460rpx;
+    border-radius: 8rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -310rpx;
+    margin-top: -230rpx;
+}
+.already-full .notice-text{
+    text-align: center;
+    font-size: 40rpx;
+    line-height: 70rpx;
+}
+.already-full button{
+     width: 450rpx; 
+	height: 88rpx;
+	background-color: #e94f4f;
+	border-radius: 10rpx;
+	/* border: solid 2rpx #d64949; */
+    margin-top:25rpx;
+    color: #fff;
+    border:none;
+}
+.already-full .button-list{
+    display: flex;
+    justify-content: center;
 }

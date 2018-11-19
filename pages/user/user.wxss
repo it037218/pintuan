@@ -1,63 +1,83 @@
 /* pages/user/user.wxss */
 
+page {
+    background-color: #0eb208;
+}
+
 .avatar {
-  text-align: center;
+    text-align: center;
+    background-color: #fff;
+    padding-bottom: 40rpx;
 }
-.avatar image{
-  border-radius: 50%;
-  overflow: hidden;
+
+.avatar image {
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 46rpx;
 }
+
 .avatar text {
-  display: block;
+    display: block;
 }
 
 view image {
-  width: 300rpx;
-  height: 300rpx;
+    width: 160rpx;
+    height: 160rpx;
 }
 
 .user-info {
-  padding: 0 50rpx;
-  background-color: #0eb208;
-  color: #fff;
-  margin-top: 100rpx;
-  position: relative;
+    /* margin: 0 50rpx; */
+    background-color: #0eb208;
+    color: #fff;
+    position: relative;
+    /* top: 350rpx; */
+    /* left: 0; */
+    width: 100%;
+    padding-top: 1px;
+    /* margin-top: 100rpx; */
+
 }
 
 .user-info > view {
-  border-bottom: 1rpx solid #229426;
-  height: 150rpx;
-  line-height: 150rpx;
-  display: flex;
-  justify-content: left;
+    border-bottom: 1rpx solid #229426;
+    height: 150rpx;
+    line-height: 150rpx;
+    display: flex;
+    justify-content: left;
 }
-.icon{
-  width: 100rpx;
-  height: 100%;
+
+.icon {
+    width: 100rpx;
+    height: 100%;
 }
-.tel .icon{
-  background: url("https://pintuan.guangxing.club/wximg/phone.png") no-repeat;
-  background-size: auto 50rpx;
-  background-position: center;
+
+.tel .icon {
+    background: url("https://pintuan.guangxing.club/wximg/phone.png") no-repeat;
+    background-size: auto 50rpx;
+    background-position: center;
 }
-.address .icon{
-  background: url("https://pintuan.guangxing.club/wximg/address.png") no-repeat;
-  background-size: auto 50rpx;
-  background-position: center;
+
+.address .icon {
+    background: url("https://pintuan.guangxing.club/wximg/address.png") no-repeat;
+    background-size: auto 50rpx;
+    background-position: center;
 }
-.wx_id .icon{
-  background: url("https://pintuan.guangxing.club/wximg/wx.png") no-repeat;
-  background-size: auto 50rpx;
-  background-position: center;
+
+.wx_id .icon {
+    background: url("https://pintuan.guangxing.club/wximg/wx.png") no-repeat;
+    background-size: auto 50rpx;
+    background-position: center;
 }
-.user-info .trangle_up{
-  display:block;
-    width:0;
-    height:0;
-    border-width:0 28rpx 28rpx;
-    border-style:solid;
-    border-color:transparent transparent #0eb208;
-  position: absolute;
-  top: -24rpx;
-  left: 361rpx;
+
+.user-info .trangle_up {
+    display: block;
+    width: 0;
+    height: 0;
+    border-width: 0 28rpx 28rpx;
+    border-style: solid;
+    border-color: transparent transparent #0eb208;
+    position: absolute;
+    top: -24rpx;
+    left: 50%;
+    margin-left: -28rpx;
 }

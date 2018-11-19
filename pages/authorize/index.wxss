@@ -1,0 +1,64 @@
+/* pages/authorize/index.wxss */
+
+.logo {
+    width: 168rpx;
+    height: 168rpx;
+    background-color: #f00;
+    border-radius: 15rpx;
+    color: #fff;
+    font-family: FZZDHJW--GB1-0;
+    font-size: 48rpx;
+    text-align: center;
+    line-height: 168rpx;
+    margin: 117rpx auto 0;
+}
+
+.description .t1 {
+    width: 658rpx;
+    height: 69rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 30rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 40rpx;
+    letter-spacing: 0px;
+    margin: 54rpx auto 0;
+    color: #313131;
+}
+
+.description .point {
+    width: 10rpx;
+    height: 10rpx;
+    background-color: #959595;
+    border-radius: 50%;
+    float: left;
+    margin-top: 15rpx;
+    margin-right: 10rpx;
+}
+
+.description .t2 {
+    width: 658rpx;
+    height: 40rpx;
+    font-family: PingFangSC-Medium;
+    font-size: 24rpx;
+    font-weight: normal;
+    font-stretch: normal;
+    line-height: 40rpx;
+    letter-spacing: 0px;
+    color: #959595;
+    margin: 50rpx auto 0;
+}
+
+.auth-button {
+    position: absolute;
+    bottom: 0;
+    width: 750rpx;
+    height: 100rpx;
+    background-color: #f00;
+    text-align: center;
+    line-height: 100rpx;
+    letter-spacing: 2rpx;
+    color: #fff;
+    font-size: 36rpx;
+    border-radius: 0;
+}

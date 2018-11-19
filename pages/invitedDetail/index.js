@@ -50,20 +50,27 @@ Page({
         'countSecond': 0,
         'countMin': 0,
         'countHour': 0,
-        'countDay': 0
+        'countDay': 0,
+        'fullAndCreate':false,
+        'fullAndCreate1': false,
+        'imageUrl': '',
+        'showSharePoster': false,
+        'hasExpired': false,
+        'showExpired': true
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-        console.log(options)
         openid = wx.getStorageSync('openid')
         if ((!openid || openid.length == 0) && !getApp().openidReadyCallback) {
             getApp().openidReadyCallback = function (inOpenid) {
                 openid = inOpenid;
+                this.checkUserStatus(openid);
             }
         }
+
         if ('order_no' in options) {
             this.setData({
                 'orderNo': options.order_no
@@ -103,8 +110,8 @@ Page({
                 var ratio = res.windowWidth / 750;
                 _self.setData({
                     ratio: ratio,
-                    canvasWidth: 660 * ratio,
-                    canvasHeight: 900 * ratio
+                    canvasWidth: 750 * ratio,
+                    canvasHeight: 1270 * ratio
                 });
             },
         })
@@ -118,6 +125,16 @@ Page({
                 });
 
                 _self.checkDownloadCount();
+            }
+        })
+        var that = this;
+        wx.request({
+            url: url + '/wx/getShareInfo',
+            data: {
+                com_id: that.data.com_id
+            },
+            success: function (rst) {
+                that.setData({ 'imageUrl': rst.data.path, 'title': rst.data.share_title })
             }
         })
     },
@@ -159,12 +176,13 @@ Page({
             // 来自页面内转发按钮
             console.log(res.target)
         }
-        var shareImgUrl = this.data.shareImgUrl + "?v=3"
+        var imageUrl = domainUrl + this.data.imageUrl + "?v=3"
+        var title = this.data.title
         var that = this;
         return {
-            title: '一起开团吧',
+            title: title,
             path: 'pages/invitedDetail/index?com_id=' + that.data.com_id + '&group_id=' + that.data.group_id,
-            imageUrl: shareImgUrl
+            imageUrl: imageUrl
         }
     },
     shareToFriend: function () {
@@ -187,60 +205,20 @@ Page({
         this.setData({
             'showSharePoster': true
         })
-        wx.request({
-            url: url + '/wx/createShareImage',
-            data: {
-                group_id: that.data.group_id
-            },
-            success: function (rst) {
-                var qrcode = domainUrl + rst.data
-                var productInfo = that.data.commodityInfo
-                _self.startDrawPoster(qrcode, productInfo);
-            }
+        wx.navigateTo({
+            url: '/pages/poster/poster?com_id=' + this.data.com_id + '&type=other&group_id=' + this.data.group_id,
         })
     },
     //检查海报资源下载情况
     checkDownloadCount: function () {
-        console.log('商品详情')
-        console.log(this.data.commodityInfo)
         if (this.data.downloadCount == 3) { //背景图和二维码图
             var ctx = wx.createCanvasContext('firstCanvas', this);
 
             //先画背景
-            ctx.drawImage(this.data.posterBgFilePath, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
-
-            //画封面图
-            ctx.drawImage(this.data.coverFilePath, 5 * this.data.ratio, 5 * this.data.ratio, 650 * this.data.ratio, 300 * this.data.ratio);
-
+            ctx.drawImage(this.data.coverFilePath, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
             //画二维码图
-            ctx.drawImage(this.data.qrcodeFilePath, 258 * this.data.ratio, 594 * this.data.ratio, 143 * this.data.ratio, 143 * this.data.ratio);
+            ctx.drawImage(this.data.qrcodeFilePath, 495 * this.data.ratio, 1005 * this.data.ratio, 190 * this.data.ratio, 190 * this.data.ratio);
 
-            //画商品名
-            ctx.setFontSize(16);
-            ctx.setTextBaseline('top');
-            ctx.setTextAlign('right');
-            ctx.fillText(this.data.commodityInfo.name, 400 * this.data.ratio, 325 * this.data.ratio);
-
-            //拼团价
-            ctx.setFillStyle('red');
-            ctx.setFontSize(20);
-            ctx.fillText('￥' + this.data.commodityInfo.tuan_price, 288 * this.data.ratio, 450 * this.data.ratio);
-
-            //代理价
-            ctx.setFontSize(16);
-            ctx.setFillStyle('black');
-            ctx.setTextAlign('left');
-            ctx.fillText(this.data.commodityInfo.tuan_price, 422 * this.data.ratio, 325 * this.data.ratio);
-
-            //几人团
-            ctx.setFillStyle('white');
-            ctx.setTextAlign('left');
-            ctx.fillText(this.data.commodityInfo.full_number, 280 * this.data.ratio, 390 * this.data.ratio);
-
-            //市场价
-            ctx.setFontSize(10);
-            ctx.setFillStyle('#a0a0a0');
-            ctx.fillText('￥' + this.data.commodityInfo.market_price, 380 * this.data.ratio, 472 * this.data.ratio);
 
             ctx.draw();
         }
@@ -262,7 +240,7 @@ Page({
 
         //下载产品封面图
         wx.downloadFile({
-            url: getApp().globalData.domainUrl + productInfo.path,
+            url: getApp().globalData.domainUrl + productInfo.poster,
             success: function (ret) {
                 _self.setData({
                     downloadCount: _self.data.downloadCount + 1,
@@ -297,9 +275,8 @@ Page({
                 rst.data.detail = rst.data.detail.replace(/\<img/gi, '<img style="max-width:100%;height:auto"')
                 that.setData({
                     'commodityInfo': rst.data,
+                    'hasExpired':content.expired
                 })
-                console.log('订单状态')
-                console.log(rst.data)
                 if(rst.data.pay_status == 2003){
                  
                 }
@@ -320,8 +297,6 @@ Page({
             },
             success: function (rst) {
                 var data = rst.data;
-                console.log('是否开团')
-                console.log(data)
                 if (data.self.length == 0) {
                     console.log('开团')
                     that.setData({ joinInGroupStatus: true })
@@ -367,14 +342,14 @@ Page({
         })
 
     },
-    editAddress: function (e) {
-        console.log(e)
-        var address_id = e.target.dataset.id;
-        console.log(address_id)
-        wx.navigateTo({
-            url: '/pages/address/address?openid=' + openid + '&address_id=' + address_id,
-        })
-    },
+    // editAddress: function (e) {
+    //     console.log(e)
+    //     var address_id = e.target.dataset.id;
+    //     console.log(address_id)
+    //     wx.navigateTo({
+    //         url: '/pages/address/address?openid=' + openid + '&address_id=' + address_id,
+    //     })
+    // },
     getOrderInfo: function (orderNo) {
         var that = this;
         wx.request({
@@ -409,14 +384,16 @@ Page({
                             'countSecond': second
                         })
                         setInterval(that.countdown, 1000)
-
-
+                    }
+                    if(orderStatus == 2003 || orderStatus == 2005){
                         that.checkUserJoinGroup()
+
                     }
                 }
             }
         })
     },
+    
     saveUserName: function (e) {
         var name = e.detail.value
         wx.request({
@@ -426,7 +403,9 @@ Page({
                 name: name
             },
             success: function (rst) {
-                console.log(rst)
+                that.setData({
+                    name: name
+                })
             }
         })
     },
@@ -439,7 +418,9 @@ Page({
                 mobile: mobile
             },
             success: function (rst) {
-                console.log(rst)
+                that.setData({
+                    mobile: mobile
+                })
             }
         })
     },
@@ -452,7 +433,9 @@ Page({
                 wx_id: wx_id
             },
             success: function (rst) {
-                console.log(rst)
+                that.setData({
+                    wx_id: wx_id
+                })
             }
         })
     },
@@ -478,15 +461,15 @@ Page({
             })
             return;
         }
-        if (!address_id) {
-            wx.showToast({
-                title: '请填写收货地址',
-                icon: 'none',
+        // if (!address_id) {
+        //     wx.showToast({
+        //         title: '请填写收货地址',
+        //         icon: 'none',
 
-                duration: 2000
-            })
-            return
-        }
+        //         duration: 2000
+        //     })
+        //     return
+        // }
 
         wx.request({
             url: url + '/wx/payForOrder',
@@ -499,9 +482,14 @@ Page({
                 group_id: that.data.group_id
             },
             success: function (rst) {
-                console.log(rst.data);
+                console.log(rst)
                 var data = rst.data.parameters
-                console.log(data)
+                if(rst.data.success == 0){
+                    that.setData({
+                        'orderStatus': 2004
+                    })
+                    return
+                }
                 wx.requestPayment({
                     timeStamp: data.timeStamp,
                     nonceStr: data.nonceStr,
@@ -591,7 +579,7 @@ Page({
     },
     formSubmit: function (e) {
         var app = getApp();
-        app.submitFormId(e.detail.formId);
+        app.submitFormId(openid,e.detail.formId);
     },
     //检查用户当前参团情况
     checkGroupUserOrder: function () {
@@ -603,9 +591,7 @@ Page({
                 group_id: that.data.group_id
             },
             success: function (rst) {
-                console.log('checkGroupUser')
-                console.log(that.data.group_id)
-                console.log(openid)
+                console.log('用户参团情况')
                 console.log(rst)
                 if (rst.data.success == 1) {
                     that.setData({
@@ -614,13 +600,36 @@ Page({
                     })
                     if (rst.data.result.pay_status == 2003) {
                         that.checkUserJoinGroup()
-
-                       
-
-
+                    }
+                    if(rst.data.result.pay_status == 2005){
+                        wx.request({
+                            url: url + '/wx/checkGroupStatus',
+                            data: {
+                                group_id: that.data.group_id
+                            },
+                            success: function (rst) {
+                                console.log('拼团状态')
+                                console.log(rst)
+                                if (rst.data.status == 10) {
+                                    that.setData({ 'fullAndCreate1': true })
+                                }
+                            }
+                        })
                     }
                 }else{
-                    
+                    wx.request({
+                        url: url +'/wx/checkGroupStatus',
+                        data:{
+                            group_id:that.data.group_id
+                        },
+                        success:function(rst){
+                            console.log('拼团状态')
+                            console.log(rst)
+                            if(rst.data.status == 10){
+                                that.setData({'fullAndCreate':true})
+                            }
+                        }
+                    })
                 }
             }
         })
@@ -722,5 +731,69 @@ Page({
                 });
             }
         }
+    },
+    createOrder: function () {
+        var that = this;
+        wx.request({
+            url: url + '/wx/createOrder',
+            data: {
+                'commodity_id': that.data.com_id,
+                'openid': openid,
+                'utm': 'self',
+            },
+            success: function (rst) {
+                var content = rst.data;
+                console.log(content)
+                wx.navigateTo({
+                    url: '/pages/inviteDetail/index?com_id=' + that.data.com_id + '&status=1&order_no=' + content.orderNo + "&group_id=" + content.groupId,
+                })
+            }
+        })
+    },
+    backToList:function(){
+        wx.redirectTo({
+            url: '/pages/orderList/index',
+        })
+    },
+    backToOrderList: function () {
+        wx.redirectTo({
+            url: '/pages/invited/invited?com_id='+this.data.com_id+'&group_id='+this.data.group_id+'&utm=other',
+            success: function (res) { },
+            fail: function (res) { },
+            complete: function (res) { },
+        })
+    },
+    checkUserStatus: function (openid) {
+        var that = this;
+        wx.request({
+            url: url + '/wx/checkUserStatus',
+            data: {
+                openid: openid
+            },
+            success: function (rst) {
+                if (rst.data.status == 0) {
+                    wx.navigateTo({
+                        url: '/pages/authorize/index',
+                        success: function (res) { },
+                        fail: function (res) { },
+                        complete: function (res) { },
+                    })
+                }
+                // that.setData({
+                //     'userStatus': rst.data.status
+                // })
+            }
+
+        })
+
+    },
+    closeModel: function () {
+        this.setData({ 'showExpired': false })
+    },
+    hideCancelModal:function(){
+        this.setData({ fullAndCreate1:false})
+        this.setData({ fullAndCreate:false})
+        this.setData({ 'showExpired': false })
+
     }
 })

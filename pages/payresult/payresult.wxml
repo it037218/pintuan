@@ -41,7 +41,7 @@
   <view>
     <view class='share-content' wx:if="{{showSharePoster}}"  bindtap='closePoster'>
 
-      <canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;background-color:#fff;positon:absolute;top:127rpx;left:45rpx;border-radius:10rpx;" canvas-id="firstCanvas" bindlongtap='saveSharePoster'></canvas>
+      <canvas style="width: {{canvasWidth}}px; height: {{canvasHeight}}px;background-color:#fff;positon:absolute;top:0;left:0rpx;border-radius:10rpx;" canvas-id="firstCanvas" bindlongtap='saveSharePoster'></canvas>
     </view>
   </view>
   
